@@ -14,15 +14,13 @@ class LogInForm extends StatelessWidget {
       listener: (context, state) {
         state.maybeMap(
           initialState: null,
-          registerFailureSuccess: null,
-          loginFailureSuccess: (failureOrSuccess) {
+          authFailureSuccess: (failureOrSuccess) {
             failureOrSuccess.loginFailureSuccess.fold(
               (failure) => null,
               (_) => ExtendedNavigator.of(context)
                   .popAndPush(Routes.blogOverviewPage),
             );
           },
-          logoutFailureSuccess: null,
           orElse: () {},
         );
       },

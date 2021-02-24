@@ -470,24 +470,11 @@ class _$AuthStateTearOff {
   }
 
 // ignore: unused_element
-  RegisterFailureSuccess registerFailureSuccess(
-      {Either<AuthFailure, Unit> registerFailureSuccess}) {
-    return RegisterFailureSuccess(
-      registerFailureSuccess: registerFailureSuccess,
-    );
-  }
-
-// ignore: unused_element
-  LoginFailureSuccess loginFailureSuccess(
+  AuthFailureSuccess authFailureSuccess(
       {Either<AuthFailure, Unit> loginFailureSuccess}) {
-    return LoginFailureSuccess(
+    return AuthFailureSuccess(
       loginFailureSuccess: loginFailureSuccess,
     );
-  }
-
-// ignore: unused_element
-  LogoutFailureSuccess logoutFailureSuccess() {
-    return const LogoutFailureSuccess();
   }
 }
 
@@ -501,35 +488,24 @@ mixin _$AuthState {
   TResult when<TResult extends Object>({
     @required TResult initialState(),
     @required
-        TResult registerFailureSuccess(
-            Either<AuthFailure, Unit> registerFailureSuccess),
-    @required
-        TResult loginFailureSuccess(
+        TResult authFailureSuccess(
             Either<AuthFailure, Unit> loginFailureSuccess),
-    @required TResult logoutFailureSuccess(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult initialState(),
-    TResult registerFailureSuccess(
-        Either<AuthFailure, Unit> registerFailureSuccess),
-    TResult loginFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
-    TResult logoutFailureSuccess(),
+    TResult authFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult initialState(InitialState value),
-    @required TResult registerFailureSuccess(RegisterFailureSuccess value),
-    @required TResult loginFailureSuccess(LoginFailureSuccess value),
-    @required TResult logoutFailureSuccess(LogoutFailureSuccess value),
+    @required TResult authFailureSuccess(AuthFailureSuccess value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult initialState(InitialState value),
-    TResult registerFailureSuccess(RegisterFailureSuccess value),
-    TResult loginFailureSuccess(LoginFailureSuccess value),
-    TResult logoutFailureSuccess(LogoutFailureSuccess value),
+    TResult authFailureSuccess(AuthFailureSuccess value),
     @required TResult orElse(),
   });
 }
@@ -589,17 +565,11 @@ class _$InitialState implements InitialState {
   TResult when<TResult extends Object>({
     @required TResult initialState(),
     @required
-        TResult registerFailureSuccess(
-            Either<AuthFailure, Unit> registerFailureSuccess),
-    @required
-        TResult loginFailureSuccess(
+        TResult authFailureSuccess(
             Either<AuthFailure, Unit> loginFailureSuccess),
-    @required TResult logoutFailureSuccess(),
   }) {
     assert(initialState != null);
-    assert(registerFailureSuccess != null);
-    assert(loginFailureSuccess != null);
-    assert(logoutFailureSuccess != null);
+    assert(authFailureSuccess != null);
     return initialState();
   }
 
@@ -607,10 +577,7 @@ class _$InitialState implements InitialState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult initialState(),
-    TResult registerFailureSuccess(
-        Either<AuthFailure, Unit> registerFailureSuccess),
-    TResult loginFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
-    TResult logoutFailureSuccess(),
+    TResult authFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -624,14 +591,10 @@ class _$InitialState implements InitialState {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult initialState(InitialState value),
-    @required TResult registerFailureSuccess(RegisterFailureSuccess value),
-    @required TResult loginFailureSuccess(LoginFailureSuccess value),
-    @required TResult logoutFailureSuccess(LogoutFailureSuccess value),
+    @required TResult authFailureSuccess(AuthFailureSuccess value),
   }) {
     assert(initialState != null);
-    assert(registerFailureSuccess != null);
-    assert(loginFailureSuccess != null);
-    assert(logoutFailureSuccess != null);
+    assert(authFailureSuccess != null);
     return initialState(this);
   }
 
@@ -639,9 +602,7 @@ class _$InitialState implements InitialState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult initialState(InitialState value),
-    TResult registerFailureSuccess(RegisterFailureSuccess value),
-    TResult loginFailureSuccess(LoginFailureSuccess value),
-    TResult logoutFailureSuccess(LogoutFailureSuccess value),
+    TResult authFailureSuccess(AuthFailureSuccess value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -657,170 +618,29 @@ abstract class InitialState implements AuthState {
 }
 
 /// @nodoc
-abstract class $RegisterFailureSuccessCopyWith<$Res> {
-  factory $RegisterFailureSuccessCopyWith(RegisterFailureSuccess value,
-          $Res Function(RegisterFailureSuccess) then) =
-      _$RegisterFailureSuccessCopyWithImpl<$Res>;
-  $Res call({Either<AuthFailure, Unit> registerFailureSuccess});
-}
-
-/// @nodoc
-class _$RegisterFailureSuccessCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res>
-    implements $RegisterFailureSuccessCopyWith<$Res> {
-  _$RegisterFailureSuccessCopyWithImpl(RegisterFailureSuccess _value,
-      $Res Function(RegisterFailureSuccess) _then)
-      : super(_value, (v) => _then(v as RegisterFailureSuccess));
-
-  @override
-  RegisterFailureSuccess get _value => super._value as RegisterFailureSuccess;
-
-  @override
-  $Res call({
-    Object registerFailureSuccess = freezed,
-  }) {
-    return _then(RegisterFailureSuccess(
-      registerFailureSuccess: registerFailureSuccess == freezed
-          ? _value.registerFailureSuccess
-          : registerFailureSuccess as Either<AuthFailure, Unit>,
-    ));
-  }
-}
-
-/// @nodoc
-class _$RegisterFailureSuccess implements RegisterFailureSuccess {
-  const _$RegisterFailureSuccess({this.registerFailureSuccess});
-
-  @override
-  final Either<AuthFailure, Unit> registerFailureSuccess;
-
-  @override
-  String toString() {
-    return 'AuthState.registerFailureSuccess(registerFailureSuccess: $registerFailureSuccess)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is RegisterFailureSuccess &&
-            (identical(other.registerFailureSuccess, registerFailureSuccess) ||
-                const DeepCollectionEquality().equals(
-                    other.registerFailureSuccess, registerFailureSuccess)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(registerFailureSuccess);
-
-  @JsonKey(ignore: true)
-  @override
-  $RegisterFailureSuccessCopyWith<RegisterFailureSuccess> get copyWith =>
-      _$RegisterFailureSuccessCopyWithImpl<RegisterFailureSuccess>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult initialState(),
-    @required
-        TResult registerFailureSuccess(
-            Either<AuthFailure, Unit> registerFailureSuccess),
-    @required
-        TResult loginFailureSuccess(
-            Either<AuthFailure, Unit> loginFailureSuccess),
-    @required TResult logoutFailureSuccess(),
-  }) {
-    assert(initialState != null);
-    assert(registerFailureSuccess != null);
-    assert(loginFailureSuccess != null);
-    assert(logoutFailureSuccess != null);
-    return registerFailureSuccess(this.registerFailureSuccess);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initialState(),
-    TResult registerFailureSuccess(
-        Either<AuthFailure, Unit> registerFailureSuccess),
-    TResult loginFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
-    TResult logoutFailureSuccess(),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (registerFailureSuccess != null) {
-      return registerFailureSuccess(this.registerFailureSuccess);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult initialState(InitialState value),
-    @required TResult registerFailureSuccess(RegisterFailureSuccess value),
-    @required TResult loginFailureSuccess(LoginFailureSuccess value),
-    @required TResult logoutFailureSuccess(LogoutFailureSuccess value),
-  }) {
-    assert(initialState != null);
-    assert(registerFailureSuccess != null);
-    assert(loginFailureSuccess != null);
-    assert(logoutFailureSuccess != null);
-    return registerFailureSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initialState(InitialState value),
-    TResult registerFailureSuccess(RegisterFailureSuccess value),
-    TResult loginFailureSuccess(LoginFailureSuccess value),
-    TResult logoutFailureSuccess(LogoutFailureSuccess value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (registerFailureSuccess != null) {
-      return registerFailureSuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class RegisterFailureSuccess implements AuthState {
-  const factory RegisterFailureSuccess(
-          {Either<AuthFailure, Unit> registerFailureSuccess}) =
-      _$RegisterFailureSuccess;
-
-  Either<AuthFailure, Unit> get registerFailureSuccess;
-  @JsonKey(ignore: true)
-  $RegisterFailureSuccessCopyWith<RegisterFailureSuccess> get copyWith;
-}
-
-/// @nodoc
-abstract class $LoginFailureSuccessCopyWith<$Res> {
-  factory $LoginFailureSuccessCopyWith(
-          LoginFailureSuccess value, $Res Function(LoginFailureSuccess) then) =
-      _$LoginFailureSuccessCopyWithImpl<$Res>;
+abstract class $AuthFailureSuccessCopyWith<$Res> {
+  factory $AuthFailureSuccessCopyWith(
+          AuthFailureSuccess value, $Res Function(AuthFailureSuccess) then) =
+      _$AuthFailureSuccessCopyWithImpl<$Res>;
   $Res call({Either<AuthFailure, Unit> loginFailureSuccess});
 }
 
 /// @nodoc
-class _$LoginFailureSuccessCopyWithImpl<$Res>
+class _$AuthFailureSuccessCopyWithImpl<$Res>
     extends _$AuthStateCopyWithImpl<$Res>
-    implements $LoginFailureSuccessCopyWith<$Res> {
-  _$LoginFailureSuccessCopyWithImpl(
-      LoginFailureSuccess _value, $Res Function(LoginFailureSuccess) _then)
-      : super(_value, (v) => _then(v as LoginFailureSuccess));
+    implements $AuthFailureSuccessCopyWith<$Res> {
+  _$AuthFailureSuccessCopyWithImpl(
+      AuthFailureSuccess _value, $Res Function(AuthFailureSuccess) _then)
+      : super(_value, (v) => _then(v as AuthFailureSuccess));
 
   @override
-  LoginFailureSuccess get _value => super._value as LoginFailureSuccess;
+  AuthFailureSuccess get _value => super._value as AuthFailureSuccess;
 
   @override
   $Res call({
     Object loginFailureSuccess = freezed,
   }) {
-    return _then(LoginFailureSuccess(
+    return _then(AuthFailureSuccess(
       loginFailureSuccess: loginFailureSuccess == freezed
           ? _value.loginFailureSuccess
           : loginFailureSuccess as Either<AuthFailure, Unit>,
@@ -829,21 +649,21 @@ class _$LoginFailureSuccessCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$LoginFailureSuccess implements LoginFailureSuccess {
-  const _$LoginFailureSuccess({this.loginFailureSuccess});
+class _$AuthFailureSuccess implements AuthFailureSuccess {
+  const _$AuthFailureSuccess({this.loginFailureSuccess});
 
   @override
   final Either<AuthFailure, Unit> loginFailureSuccess;
 
   @override
   String toString() {
-    return 'AuthState.loginFailureSuccess(loginFailureSuccess: $loginFailureSuccess)';
+    return 'AuthState.authFailureSuccess(loginFailureSuccess: $loginFailureSuccess)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is LoginFailureSuccess &&
+        (other is AuthFailureSuccess &&
             (identical(other.loginFailureSuccess, loginFailureSuccess) ||
                 const DeepCollectionEquality()
                     .equals(other.loginFailureSuccess, loginFailureSuccess)));
@@ -856,41 +676,32 @@ class _$LoginFailureSuccess implements LoginFailureSuccess {
 
   @JsonKey(ignore: true)
   @override
-  $LoginFailureSuccessCopyWith<LoginFailureSuccess> get copyWith =>
-      _$LoginFailureSuccessCopyWithImpl<LoginFailureSuccess>(this, _$identity);
+  $AuthFailureSuccessCopyWith<AuthFailureSuccess> get copyWith =>
+      _$AuthFailureSuccessCopyWithImpl<AuthFailureSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult initialState(),
     @required
-        TResult registerFailureSuccess(
-            Either<AuthFailure, Unit> registerFailureSuccess),
-    @required
-        TResult loginFailureSuccess(
+        TResult authFailureSuccess(
             Either<AuthFailure, Unit> loginFailureSuccess),
-    @required TResult logoutFailureSuccess(),
   }) {
     assert(initialState != null);
-    assert(registerFailureSuccess != null);
-    assert(loginFailureSuccess != null);
-    assert(logoutFailureSuccess != null);
-    return loginFailureSuccess(this.loginFailureSuccess);
+    assert(authFailureSuccess != null);
+    return authFailureSuccess(loginFailureSuccess);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult initialState(),
-    TResult registerFailureSuccess(
-        Either<AuthFailure, Unit> registerFailureSuccess),
-    TResult loginFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
-    TResult logoutFailureSuccess(),
+    TResult authFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (loginFailureSuccess != null) {
-      return loginFailureSuccess(this.loginFailureSuccess);
+    if (authFailureSuccess != null) {
+      return authFailureSuccess(loginFailureSuccess);
     }
     return orElse();
   }
@@ -899,147 +710,33 @@ class _$LoginFailureSuccess implements LoginFailureSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult initialState(InitialState value),
-    @required TResult registerFailureSuccess(RegisterFailureSuccess value),
-    @required TResult loginFailureSuccess(LoginFailureSuccess value),
-    @required TResult logoutFailureSuccess(LogoutFailureSuccess value),
+    @required TResult authFailureSuccess(AuthFailureSuccess value),
   }) {
     assert(initialState != null);
-    assert(registerFailureSuccess != null);
-    assert(loginFailureSuccess != null);
-    assert(logoutFailureSuccess != null);
-    return loginFailureSuccess(this);
+    assert(authFailureSuccess != null);
+    return authFailureSuccess(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult initialState(InitialState value),
-    TResult registerFailureSuccess(RegisterFailureSuccess value),
-    TResult loginFailureSuccess(LoginFailureSuccess value),
-    TResult logoutFailureSuccess(LogoutFailureSuccess value),
+    TResult authFailureSuccess(AuthFailureSuccess value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (loginFailureSuccess != null) {
-      return loginFailureSuccess(this);
+    if (authFailureSuccess != null) {
+      return authFailureSuccess(this);
     }
     return orElse();
   }
 }
 
-abstract class LoginFailureSuccess implements AuthState {
-  const factory LoginFailureSuccess(
-      {Either<AuthFailure, Unit> loginFailureSuccess}) = _$LoginFailureSuccess;
+abstract class AuthFailureSuccess implements AuthState {
+  const factory AuthFailureSuccess(
+      {Either<AuthFailure, Unit> loginFailureSuccess}) = _$AuthFailureSuccess;
 
   Either<AuthFailure, Unit> get loginFailureSuccess;
   @JsonKey(ignore: true)
-  $LoginFailureSuccessCopyWith<LoginFailureSuccess> get copyWith;
-}
-
-/// @nodoc
-abstract class $LogoutFailureSuccessCopyWith<$Res> {
-  factory $LogoutFailureSuccessCopyWith(LogoutFailureSuccess value,
-          $Res Function(LogoutFailureSuccess) then) =
-      _$LogoutFailureSuccessCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$LogoutFailureSuccessCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res>
-    implements $LogoutFailureSuccessCopyWith<$Res> {
-  _$LogoutFailureSuccessCopyWithImpl(
-      LogoutFailureSuccess _value, $Res Function(LogoutFailureSuccess) _then)
-      : super(_value, (v) => _then(v as LogoutFailureSuccess));
-
-  @override
-  LogoutFailureSuccess get _value => super._value as LogoutFailureSuccess;
-}
-
-/// @nodoc
-class _$LogoutFailureSuccess implements LogoutFailureSuccess {
-  const _$LogoutFailureSuccess();
-
-  @override
-  String toString() {
-    return 'AuthState.logoutFailureSuccess()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is LogoutFailureSuccess);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult initialState(),
-    @required
-        TResult registerFailureSuccess(
-            Either<AuthFailure, Unit> registerFailureSuccess),
-    @required
-        TResult loginFailureSuccess(
-            Either<AuthFailure, Unit> loginFailureSuccess),
-    @required TResult logoutFailureSuccess(),
-  }) {
-    assert(initialState != null);
-    assert(registerFailureSuccess != null);
-    assert(loginFailureSuccess != null);
-    assert(logoutFailureSuccess != null);
-    return logoutFailureSuccess();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initialState(),
-    TResult registerFailureSuccess(
-        Either<AuthFailure, Unit> registerFailureSuccess),
-    TResult loginFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
-    TResult logoutFailureSuccess(),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (logoutFailureSuccess != null) {
-      return logoutFailureSuccess();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult initialState(InitialState value),
-    @required TResult registerFailureSuccess(RegisterFailureSuccess value),
-    @required TResult loginFailureSuccess(LoginFailureSuccess value),
-    @required TResult logoutFailureSuccess(LogoutFailureSuccess value),
-  }) {
-    assert(initialState != null);
-    assert(registerFailureSuccess != null);
-    assert(loginFailureSuccess != null);
-    assert(logoutFailureSuccess != null);
-    return logoutFailureSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initialState(InitialState value),
-    TResult registerFailureSuccess(RegisterFailureSuccess value),
-    TResult loginFailureSuccess(LoginFailureSuccess value),
-    TResult logoutFailureSuccess(LogoutFailureSuccess value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (logoutFailureSuccess != null) {
-      return logoutFailureSuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LogoutFailureSuccess implements AuthState {
-  const factory LogoutFailureSuccess() = _$LogoutFailureSuccess;
+  $AuthFailureSuccessCopyWith<AuthFailureSuccess> get copyWith;
 }
