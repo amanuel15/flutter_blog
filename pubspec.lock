@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.40.6"
+  another_flushbar:
+    dependency: "direct main"
+    description:
+      name: another_flushbar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.10.11"
   args:
     dependency: transitive
     description:
@@ -246,6 +253,11 @@ packages:
     version: "3.3.5"
   flutter_test:
     dependency: "direct dev"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"

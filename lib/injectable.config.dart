@@ -26,7 +26,6 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   final injectableModule = _$InjectableModule();
-  gh.factory<AuthBloc>(() => AuthBloc(get<AuthRepository>()));
   gh.lazySingleton<Dio>(() => injectableModule.dio);
   gh.lazySingleton<FlutterSecureStorage>(
       () => injectableModule.flutterSecureStorage);
@@ -36,6 +35,7 @@ GetIt $initGetIt(
       () => AuthRepository(get<Dio>(), get<FlutterSecureStorage>()));
   gh.factory<CurrentAuthBloc>(
       () => CurrentAuthBloc(get<AuthRepositoryAbstract>()));
+  gh.factory<AuthBloc>(() => AuthBloc(get<AuthRepositoryAbstract>()));
   return get;
 }
 

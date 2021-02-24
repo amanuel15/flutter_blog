@@ -14,23 +14,34 @@ class _$AuthEventTearOff {
   const _$AuthEventTearOff();
 
 // ignore: unused_element
-  Register register(
-      {@required String name,
-      @required String email,
-      @required String password}) {
-    return Register(
-      name: name,
-      email: email,
-      password: password,
+  EmailChanged emailChanged(String emailStr) {
+    return EmailChanged(
+      emailStr,
     );
   }
 
 // ignore: unused_element
-  Login login({@required String email, @required String password}) {
-    return Login(
-      email: email,
-      password: password,
+  NameChanged nameChanged(String name) {
+    return NameChanged(
+      name,
     );
+  }
+
+// ignore: unused_element
+  PasswordChanged passwordChanged(String password) {
+    return PasswordChanged(
+      password,
+    );
+  }
+
+// ignore: unused_element
+  Register register() {
+    return const Register();
+  }
+
+// ignore: unused_element
+  Login login() {
+    return const Login();
   }
 
 // ignore: unused_element
@@ -47,25 +58,37 @@ const $AuthEvent = _$AuthEventTearOff();
 mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult register(String name, String email, String password),
-    @required TResult login(String email, String password),
+    @required TResult emailChanged(String emailStr),
+    @required TResult nameChanged(String name),
+    @required TResult passwordChanged(String password),
+    @required TResult register(),
+    @required TResult login(),
     @required TResult logout(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult register(String name, String email, String password),
-    TResult login(String email, String password),
+    TResult emailChanged(String emailStr),
+    TResult nameChanged(String name),
+    TResult passwordChanged(String password),
+    TResult register(),
+    TResult login(),
     TResult logout(),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult nameChanged(NameChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
     @required TResult logout(Logout value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult nameChanged(NameChanged value),
+    TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
     TResult logout(Logout value),
@@ -89,10 +112,431 @@ class _$AuthEventCopyWithImpl<$Res> implements $AuthEventCopyWith<$Res> {
 }
 
 /// @nodoc
+abstract class $EmailChangedCopyWith<$Res> {
+  factory $EmailChangedCopyWith(
+          EmailChanged value, $Res Function(EmailChanged) then) =
+      _$EmailChangedCopyWithImpl<$Res>;
+  $Res call({String emailStr});
+}
+
+/// @nodoc
+class _$EmailChangedCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
+    implements $EmailChangedCopyWith<$Res> {
+  _$EmailChangedCopyWithImpl(
+      EmailChanged _value, $Res Function(EmailChanged) _then)
+      : super(_value, (v) => _then(v as EmailChanged));
+
+  @override
+  EmailChanged get _value => super._value as EmailChanged;
+
+  @override
+  $Res call({
+    Object emailStr = freezed,
+  }) {
+    return _then(EmailChanged(
+      emailStr == freezed ? _value.emailStr : emailStr as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$EmailChanged implements EmailChanged {
+  const _$EmailChanged(this.emailStr) : assert(emailStr != null);
+
+  @override
+  final String emailStr;
+
+  @override
+  String toString() {
+    return 'AuthEvent.emailChanged(emailStr: $emailStr)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is EmailChanged &&
+            (identical(other.emailStr, emailStr) ||
+                const DeepCollectionEquality()
+                    .equals(other.emailStr, emailStr)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(emailStr);
+
+  @JsonKey(ignore: true)
+  @override
+  $EmailChangedCopyWith<EmailChanged> get copyWith =>
+      _$EmailChangedCopyWithImpl<EmailChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult emailChanged(String emailStr),
+    @required TResult nameChanged(String name),
+    @required TResult passwordChanged(String password),
+    @required TResult register(),
+    @required TResult login(),
+    @required TResult logout(),
+  }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
+    assert(register != null);
+    assert(login != null);
+    assert(logout != null);
+    return emailChanged(emailStr);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult emailChanged(String emailStr),
+    TResult nameChanged(String name),
+    TResult passwordChanged(String password),
+    TResult register(),
+    TResult login(),
+    TResult logout(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (emailChanged != null) {
+      return emailChanged(emailStr);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult nameChanged(NameChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
+    @required TResult register(Register value),
+    @required TResult login(Login value),
+    @required TResult logout(Logout value),
+  }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
+    assert(register != null);
+    assert(login != null);
+    assert(logout != null);
+    return emailChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult nameChanged(NameChanged value),
+    TResult passwordChanged(PasswordChanged value),
+    TResult register(Register value),
+    TResult login(Login value),
+    TResult logout(Logout value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (emailChanged != null) {
+      return emailChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EmailChanged implements AuthEvent {
+  const factory EmailChanged(String emailStr) = _$EmailChanged;
+
+  String get emailStr;
+  @JsonKey(ignore: true)
+  $EmailChangedCopyWith<EmailChanged> get copyWith;
+}
+
+/// @nodoc
+abstract class $NameChangedCopyWith<$Res> {
+  factory $NameChangedCopyWith(
+          NameChanged value, $Res Function(NameChanged) then) =
+      _$NameChangedCopyWithImpl<$Res>;
+  $Res call({String name});
+}
+
+/// @nodoc
+class _$NameChangedCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
+    implements $NameChangedCopyWith<$Res> {
+  _$NameChangedCopyWithImpl(
+      NameChanged _value, $Res Function(NameChanged) _then)
+      : super(_value, (v) => _then(v as NameChanged));
+
+  @override
+  NameChanged get _value => super._value as NameChanged;
+
+  @override
+  $Res call({
+    Object name = freezed,
+  }) {
+    return _then(NameChanged(
+      name == freezed ? _value.name : name as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$NameChanged implements NameChanged {
+  const _$NameChanged(this.name) : assert(name != null);
+
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'AuthEvent.nameChanged(name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is NameChanged &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(name);
+
+  @JsonKey(ignore: true)
+  @override
+  $NameChangedCopyWith<NameChanged> get copyWith =>
+      _$NameChangedCopyWithImpl<NameChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult emailChanged(String emailStr),
+    @required TResult nameChanged(String name),
+    @required TResult passwordChanged(String password),
+    @required TResult register(),
+    @required TResult login(),
+    @required TResult logout(),
+  }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
+    assert(register != null);
+    assert(login != null);
+    assert(logout != null);
+    return nameChanged(name);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult emailChanged(String emailStr),
+    TResult nameChanged(String name),
+    TResult passwordChanged(String password),
+    TResult register(),
+    TResult login(),
+    TResult logout(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (nameChanged != null) {
+      return nameChanged(name);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult nameChanged(NameChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
+    @required TResult register(Register value),
+    @required TResult login(Login value),
+    @required TResult logout(Logout value),
+  }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
+    assert(register != null);
+    assert(login != null);
+    assert(logout != null);
+    return nameChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult nameChanged(NameChanged value),
+    TResult passwordChanged(PasswordChanged value),
+    TResult register(Register value),
+    TResult login(Login value),
+    TResult logout(Logout value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (nameChanged != null) {
+      return nameChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NameChanged implements AuthEvent {
+  const factory NameChanged(String name) = _$NameChanged;
+
+  String get name;
+  @JsonKey(ignore: true)
+  $NameChangedCopyWith<NameChanged> get copyWith;
+}
+
+/// @nodoc
+abstract class $PasswordChangedCopyWith<$Res> {
+  factory $PasswordChangedCopyWith(
+          PasswordChanged value, $Res Function(PasswordChanged) then) =
+      _$PasswordChangedCopyWithImpl<$Res>;
+  $Res call({String password});
+}
+
+/// @nodoc
+class _$PasswordChangedCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
+    implements $PasswordChangedCopyWith<$Res> {
+  _$PasswordChangedCopyWithImpl(
+      PasswordChanged _value, $Res Function(PasswordChanged) _then)
+      : super(_value, (v) => _then(v as PasswordChanged));
+
+  @override
+  PasswordChanged get _value => super._value as PasswordChanged;
+
+  @override
+  $Res call({
+    Object password = freezed,
+  }) {
+    return _then(PasswordChanged(
+      password == freezed ? _value.password : password as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$PasswordChanged implements PasswordChanged {
+  const _$PasswordChanged(this.password) : assert(password != null);
+
+  @override
+  final String password;
+
+  @override
+  String toString() {
+    return 'AuthEvent.passwordChanged(password: $password)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is PasswordChanged &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(password);
+
+  @JsonKey(ignore: true)
+  @override
+  $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
+      _$PasswordChangedCopyWithImpl<PasswordChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult emailChanged(String emailStr),
+    @required TResult nameChanged(String name),
+    @required TResult passwordChanged(String password),
+    @required TResult register(),
+    @required TResult login(),
+    @required TResult logout(),
+  }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
+    assert(register != null);
+    assert(login != null);
+    assert(logout != null);
+    return passwordChanged(password);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult emailChanged(String emailStr),
+    TResult nameChanged(String name),
+    TResult passwordChanged(String password),
+    TResult register(),
+    TResult login(),
+    TResult logout(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (passwordChanged != null) {
+      return passwordChanged(password);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult nameChanged(NameChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
+    @required TResult register(Register value),
+    @required TResult login(Login value),
+    @required TResult logout(Logout value),
+  }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
+    assert(register != null);
+    assert(login != null);
+    assert(logout != null);
+    return passwordChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult nameChanged(NameChanged value),
+    TResult passwordChanged(PasswordChanged value),
+    TResult register(Register value),
+    TResult login(Login value),
+    TResult logout(Logout value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (passwordChanged != null) {
+      return passwordChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PasswordChanged implements AuthEvent {
+  const factory PasswordChanged(String password) = _$PasswordChanged;
+
+  String get password;
+  @JsonKey(ignore: true)
+  $PasswordChangedCopyWith<PasswordChanged> get copyWith;
+}
+
+/// @nodoc
 abstract class $RegisterCopyWith<$Res> {
   factory $RegisterCopyWith(Register value, $Res Function(Register) then) =
       _$RegisterCopyWithImpl<$Res>;
-  $Res call({String name, String email, String password});
 }
 
 /// @nodoc
@@ -103,90 +547,58 @@ class _$RegisterCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
 
   @override
   Register get _value => super._value as Register;
-
-  @override
-  $Res call({
-    Object name = freezed,
-    Object email = freezed,
-    Object password = freezed,
-  }) {
-    return _then(Register(
-      name: name == freezed ? _value.name : name as String,
-      email: email == freezed ? _value.email : email as String,
-      password: password == freezed ? _value.password : password as String,
-    ));
-  }
 }
 
 /// @nodoc
 class _$Register implements Register {
-  const _$Register(
-      {@required this.name, @required this.email, @required this.password})
-      : assert(name != null),
-        assert(email != null),
-        assert(password != null);
-
-  @override
-  final String name;
-  @override
-  final String email;
-  @override
-  final String password;
+  const _$Register();
 
   @override
   String toString() {
-    return 'AuthEvent.register(name: $name, email: $email, password: $password)';
+    return 'AuthEvent.register()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is Register &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
-            (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)));
+    return identical(this, other) || (other is Register);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(password);
-
-  @JsonKey(ignore: true)
-  @override
-  $RegisterCopyWith<Register> get copyWith =>
-      _$RegisterCopyWithImpl<Register>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult register(String name, String email, String password),
-    @required TResult login(String email, String password),
+    @required TResult emailChanged(String emailStr),
+    @required TResult nameChanged(String name),
+    @required TResult passwordChanged(String password),
+    @required TResult register(),
+    @required TResult login(),
     @required TResult logout(),
   }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
     assert(logout != null);
-    return register(name, email, password);
+    return register();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult register(String name, String email, String password),
-    TResult login(String email, String password),
+    TResult emailChanged(String emailStr),
+    TResult nameChanged(String name),
+    TResult passwordChanged(String password),
+    TResult register(),
+    TResult login(),
     TResult logout(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (register != null) {
-      return register(name, email, password);
+      return register();
     }
     return orElse();
   }
@@ -194,10 +606,16 @@ class _$Register implements Register {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult nameChanged(NameChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
     @required TResult logout(Logout value),
   }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
     assert(logout != null);
@@ -207,6 +625,9 @@ class _$Register implements Register {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult nameChanged(NameChanged value),
+    TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
     TResult logout(Logout value),
@@ -221,23 +642,13 @@ class _$Register implements Register {
 }
 
 abstract class Register implements AuthEvent {
-  const factory Register(
-      {@required String name,
-      @required String email,
-      @required String password}) = _$Register;
-
-  String get name;
-  String get email;
-  String get password;
-  @JsonKey(ignore: true)
-  $RegisterCopyWith<Register> get copyWith;
+  const factory Register() = _$Register;
 }
 
 /// @nodoc
 abstract class $LoginCopyWith<$Res> {
   factory $LoginCopyWith(Login value, $Res Function(Login) then) =
       _$LoginCopyWithImpl<$Res>;
-  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -248,81 +659,58 @@ class _$LoginCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
 
   @override
   Login get _value => super._value as Login;
-
-  @override
-  $Res call({
-    Object email = freezed,
-    Object password = freezed,
-  }) {
-    return _then(Login(
-      email: email == freezed ? _value.email : email as String,
-      password: password == freezed ? _value.password : password as String,
-    ));
-  }
 }
 
 /// @nodoc
 class _$Login implements Login {
-  const _$Login({@required this.email, @required this.password})
-      : assert(email != null),
-        assert(password != null);
-
-  @override
-  final String email;
-  @override
-  final String password;
+  const _$Login();
 
   @override
   String toString() {
-    return 'AuthEvent.login(email: $email, password: $password)';
+    return 'AuthEvent.login()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is Login &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
-            (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)));
+    return identical(this, other) || (other is Login);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(password);
-
-  @JsonKey(ignore: true)
-  @override
-  $LoginCopyWith<Login> get copyWith =>
-      _$LoginCopyWithImpl<Login>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult register(String name, String email, String password),
-    @required TResult login(String email, String password),
+    @required TResult emailChanged(String emailStr),
+    @required TResult nameChanged(String name),
+    @required TResult passwordChanged(String password),
+    @required TResult register(),
+    @required TResult login(),
     @required TResult logout(),
   }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
     assert(logout != null);
-    return login(email, password);
+    return login();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult register(String name, String email, String password),
-    TResult login(String email, String password),
+    TResult emailChanged(String emailStr),
+    TResult nameChanged(String name),
+    TResult passwordChanged(String password),
+    TResult register(),
+    TResult login(),
     TResult logout(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (login != null) {
-      return login(email, password);
+      return login();
     }
     return orElse();
   }
@@ -330,10 +718,16 @@ class _$Login implements Login {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult nameChanged(NameChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
     @required TResult logout(Logout value),
   }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
     assert(logout != null);
@@ -343,6 +737,9 @@ class _$Login implements Login {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult nameChanged(NameChanged value),
+    TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
     TResult logout(Logout value),
@@ -357,13 +754,7 @@ class _$Login implements Login {
 }
 
 abstract class Login implements AuthEvent {
-  const factory Login({@required String email, @required String password}) =
-      _$Login;
-
-  String get email;
-  String get password;
-  @JsonKey(ignore: true)
-  $LoginCopyWith<Login> get copyWith;
+  const factory Login() = _$Login;
 }
 
 /// @nodoc
@@ -402,10 +793,16 @@ class _$Logout implements Logout {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult register(String name, String email, String password),
-    @required TResult login(String email, String password),
+    @required TResult emailChanged(String emailStr),
+    @required TResult nameChanged(String name),
+    @required TResult passwordChanged(String password),
+    @required TResult register(),
+    @required TResult login(),
     @required TResult logout(),
   }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
     assert(logout != null);
@@ -415,8 +812,11 @@ class _$Logout implements Logout {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult register(String name, String email, String password),
-    TResult login(String email, String password),
+    TResult emailChanged(String emailStr),
+    TResult nameChanged(String name),
+    TResult passwordChanged(String password),
+    TResult register(),
+    TResult login(),
     TResult logout(),
     @required TResult orElse(),
   }) {
@@ -430,10 +830,16 @@ class _$Logout implements Logout {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
+    @required TResult emailChanged(EmailChanged value),
+    @required TResult nameChanged(NameChanged value),
+    @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
     @required TResult logout(Logout value),
   }) {
+    assert(emailChanged != null);
+    assert(nameChanged != null);
+    assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
     assert(logout != null);
@@ -443,6 +849,9 @@ class _$Logout implements Logout {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
+    TResult emailChanged(EmailChanged value),
+    TResult nameChanged(NameChanged value),
+    TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
     TResult logout(Logout value),
@@ -465,15 +874,20 @@ class _$AuthStateTearOff {
   const _$AuthStateTearOff();
 
 // ignore: unused_element
-  InitialState initialState() {
-    return const InitialState();
-  }
-
-// ignore: unused_element
-  AuthFailureSuccess authFailureSuccess(
-      {Either<AuthFailure, Unit> loginFailureSuccess}) {
-    return AuthFailureSuccess(
-      loginFailureSuccess: loginFailureSuccess,
+  _AuthState call(
+      {@required EmailAddress emailAddress,
+      @required Password password,
+      @required Name name,
+      @required bool showErrorMessages,
+      @required bool isSubmitting,
+      @required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption}) {
+    return _AuthState(
+      emailAddress: emailAddress,
+      password: password,
+      name: name,
+      showErrorMessages: showErrorMessages,
+      isSubmitting: isSubmitting,
+      authFailureOrSuccessOption: authFailureOrSuccessOption,
     );
   }
 }
@@ -484,36 +898,28 @@ const $AuthState = _$AuthStateTearOff();
 
 /// @nodoc
 mixin _$AuthState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult initialState(),
-    @required
-        TResult authFailureSuccess(
-            Either<AuthFailure, Unit> loginFailureSuccess),
-  });
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initialState(),
-    TResult authFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
-    @required TResult orElse(),
-  });
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult initialState(InitialState value),
-    @required TResult authFailureSuccess(AuthFailureSuccess value),
-  });
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initialState(InitialState value),
-    TResult authFailureSuccess(AuthFailureSuccess value),
-    @required TResult orElse(),
-  });
+  EmailAddress get emailAddress;
+  Password get password;
+  Name get name;
+  bool get showErrorMessages;
+  bool get isSubmitting;
+  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
+
+  @JsonKey(ignore: true)
+  $AuthStateCopyWith<AuthState> get copyWith;
 }
 
 /// @nodoc
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res>;
+  $Res call(
+      {EmailAddress emailAddress,
+      Password password,
+      Name name,
+      bool showErrorMessages,
+      bool isSubmitting,
+      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -523,220 +929,189 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
   final AuthState _value;
   // ignore: unused_field
   final $Res Function(AuthState) _then;
-}
-
-/// @nodoc
-abstract class $InitialStateCopyWith<$Res> {
-  factory $InitialStateCopyWith(
-          InitialState value, $Res Function(InitialState) then) =
-      _$InitialStateCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$InitialStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
-    implements $InitialStateCopyWith<$Res> {
-  _$InitialStateCopyWithImpl(
-      InitialState _value, $Res Function(InitialState) _then)
-      : super(_value, (v) => _then(v as InitialState));
-
-  @override
-  InitialState get _value => super._value as InitialState;
-}
-
-/// @nodoc
-class _$InitialState implements InitialState {
-  const _$InitialState();
-
-  @override
-  String toString() {
-    return 'AuthState.initialState()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is InitialState);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult initialState(),
-    @required
-        TResult authFailureSuccess(
-            Either<AuthFailure, Unit> loginFailureSuccess),
-  }) {
-    assert(initialState != null);
-    assert(authFailureSuccess != null);
-    return initialState();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initialState(),
-    TResult authFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (initialState != null) {
-      return initialState();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult initialState(InitialState value),
-    @required TResult authFailureSuccess(AuthFailureSuccess value),
-  }) {
-    assert(initialState != null);
-    assert(authFailureSuccess != null);
-    return initialState(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initialState(InitialState value),
-    TResult authFailureSuccess(AuthFailureSuccess value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (initialState != null) {
-      return initialState(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class InitialState implements AuthState {
-  const factory InitialState() = _$InitialState;
-}
-
-/// @nodoc
-abstract class $AuthFailureSuccessCopyWith<$Res> {
-  factory $AuthFailureSuccessCopyWith(
-          AuthFailureSuccess value, $Res Function(AuthFailureSuccess) then) =
-      _$AuthFailureSuccessCopyWithImpl<$Res>;
-  $Res call({Either<AuthFailure, Unit> loginFailureSuccess});
-}
-
-/// @nodoc
-class _$AuthFailureSuccessCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res>
-    implements $AuthFailureSuccessCopyWith<$Res> {
-  _$AuthFailureSuccessCopyWithImpl(
-      AuthFailureSuccess _value, $Res Function(AuthFailureSuccess) _then)
-      : super(_value, (v) => _then(v as AuthFailureSuccess));
-
-  @override
-  AuthFailureSuccess get _value => super._value as AuthFailureSuccess;
 
   @override
   $Res call({
-    Object loginFailureSuccess = freezed,
+    Object emailAddress = freezed,
+    Object password = freezed,
+    Object name = freezed,
+    Object showErrorMessages = freezed,
+    Object isSubmitting = freezed,
+    Object authFailureOrSuccessOption = freezed,
   }) {
-    return _then(AuthFailureSuccess(
-      loginFailureSuccess: loginFailureSuccess == freezed
-          ? _value.loginFailureSuccess
-          : loginFailureSuccess as Either<AuthFailure, Unit>,
+    return _then(_value.copyWith(
+      emailAddress: emailAddress == freezed
+          ? _value.emailAddress
+          : emailAddress as EmailAddress,
+      password: password == freezed ? _value.password : password as Password,
+      name: name == freezed ? _value.name : name as Name,
+      showErrorMessages: showErrorMessages == freezed
+          ? _value.showErrorMessages
+          : showErrorMessages as bool,
+      isSubmitting:
+          isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
+      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
+          ? _value.authFailureOrSuccessOption
+          : authFailureOrSuccessOption as Option<Either<AuthFailure, Unit>>,
     ));
   }
 }
 
 /// @nodoc
-class _$AuthFailureSuccess implements AuthFailureSuccess {
-  const _$AuthFailureSuccess({this.loginFailureSuccess});
+abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
+  factory _$AuthStateCopyWith(
+          _AuthState value, $Res Function(_AuthState) then) =
+      __$AuthStateCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {EmailAddress emailAddress,
+      Password password,
+      Name name,
+      bool showErrorMessages,
+      bool isSubmitting,
+      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
+}
+
+/// @nodoc
+class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+    implements _$AuthStateCopyWith<$Res> {
+  __$AuthStateCopyWithImpl(_AuthState _value, $Res Function(_AuthState) _then)
+      : super(_value, (v) => _then(v as _AuthState));
 
   @override
-  final Either<AuthFailure, Unit> loginFailureSuccess;
+  _AuthState get _value => super._value as _AuthState;
+
+  @override
+  $Res call({
+    Object emailAddress = freezed,
+    Object password = freezed,
+    Object name = freezed,
+    Object showErrorMessages = freezed,
+    Object isSubmitting = freezed,
+    Object authFailureOrSuccessOption = freezed,
+  }) {
+    return _then(_AuthState(
+      emailAddress: emailAddress == freezed
+          ? _value.emailAddress
+          : emailAddress as EmailAddress,
+      password: password == freezed ? _value.password : password as Password,
+      name: name == freezed ? _value.name : name as Name,
+      showErrorMessages: showErrorMessages == freezed
+          ? _value.showErrorMessages
+          : showErrorMessages as bool,
+      isSubmitting:
+          isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
+      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
+          ? _value.authFailureOrSuccessOption
+          : authFailureOrSuccessOption as Option<Either<AuthFailure, Unit>>,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_AuthState implements _AuthState {
+  const _$_AuthState(
+      {@required this.emailAddress,
+      @required this.password,
+      @required this.name,
+      @required this.showErrorMessages,
+      @required this.isSubmitting,
+      @required this.authFailureOrSuccessOption})
+      : assert(emailAddress != null),
+        assert(password != null),
+        assert(name != null),
+        assert(showErrorMessages != null),
+        assert(isSubmitting != null),
+        assert(authFailureOrSuccessOption != null);
+
+  @override
+  final EmailAddress emailAddress;
+  @override
+  final Password password;
+  @override
+  final Name name;
+  @override
+  final bool showErrorMessages;
+  @override
+  final bool isSubmitting;
+  @override
+  final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'AuthState.authFailureSuccess(loginFailureSuccess: $loginFailureSuccess)';
+    return 'AuthState(emailAddress: $emailAddress, password: $password, name: $name, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is AuthFailureSuccess &&
-            (identical(other.loginFailureSuccess, loginFailureSuccess) ||
+        (other is _AuthState &&
+            (identical(other.emailAddress, emailAddress) ||
                 const DeepCollectionEquality()
-                    .equals(other.loginFailureSuccess, loginFailureSuccess)));
+                    .equals(other.emailAddress, emailAddress)) &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.showErrorMessages, showErrorMessages) ||
+                const DeepCollectionEquality()
+                    .equals(other.showErrorMessages, showErrorMessages)) &&
+            (identical(other.isSubmitting, isSubmitting) ||
+                const DeepCollectionEquality()
+                    .equals(other.isSubmitting, isSubmitting)) &&
+            (identical(other.authFailureOrSuccessOption,
+                    authFailureOrSuccessOption) ||
+                const DeepCollectionEquality().equals(
+                    other.authFailureOrSuccessOption,
+                    authFailureOrSuccessOption)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(loginFailureSuccess);
+      const DeepCollectionEquality().hash(emailAddress) ^
+      const DeepCollectionEquality().hash(password) ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(showErrorMessages) ^
+      const DeepCollectionEquality().hash(isSubmitting) ^
+      const DeepCollectionEquality().hash(authFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
-  $AuthFailureSuccessCopyWith<AuthFailureSuccess> get copyWith =>
-      _$AuthFailureSuccessCopyWithImpl<AuthFailureSuccess>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult initialState(),
-    @required
-        TResult authFailureSuccess(
-            Either<AuthFailure, Unit> loginFailureSuccess),
-  }) {
-    assert(initialState != null);
-    assert(authFailureSuccess != null);
-    return authFailureSuccess(loginFailureSuccess);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initialState(),
-    TResult authFailureSuccess(Either<AuthFailure, Unit> loginFailureSuccess),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (authFailureSuccess != null) {
-      return authFailureSuccess(loginFailureSuccess);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult initialState(InitialState value),
-    @required TResult authFailureSuccess(AuthFailureSuccess value),
-  }) {
-    assert(initialState != null);
-    assert(authFailureSuccess != null);
-    return authFailureSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initialState(InitialState value),
-    TResult authFailureSuccess(AuthFailureSuccess value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (authFailureSuccess != null) {
-      return authFailureSuccess(this);
-    }
-    return orElse();
-  }
+  _$AuthStateCopyWith<_AuthState> get copyWith =>
+      __$AuthStateCopyWithImpl<_AuthState>(this, _$identity);
 }
 
-abstract class AuthFailureSuccess implements AuthState {
-  const factory AuthFailureSuccess(
-      {Either<AuthFailure, Unit> loginFailureSuccess}) = _$AuthFailureSuccess;
+abstract class _AuthState implements AuthState {
+  const factory _AuthState(
+          {@required
+              EmailAddress emailAddress,
+          @required
+              Password password,
+          @required
+              Name name,
+          @required
+              bool showErrorMessages,
+          @required
+              bool isSubmitting,
+          @required
+              Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption}) =
+      _$_AuthState;
 
-  Either<AuthFailure, Unit> get loginFailureSuccess;
+  @override
+  EmailAddress get emailAddress;
+  @override
+  Password get password;
+  @override
+  Name get name;
+  @override
+  bool get showErrorMessages;
+  @override
+  bool get isSubmitting;
+  @override
+  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
+  @override
   @JsonKey(ignore: true)
-  $AuthFailureSuccessCopyWith<AuthFailureSuccess> get copyWith;
+  _$AuthStateCopyWith<_AuthState> get copyWith;
 }

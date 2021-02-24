@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,16 +13,24 @@ class LogInForm extends StatelessWidget {
     var email, password, token;
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
-        state.maybeMap(
-          initialState: null,
-          authFailureSuccess: (failureOrSuccess) {
-            failureOrSuccess.loginFailureSuccess.fold(
-              (failure) => null,
-              (_) => ExtendedNavigator.of(context)
-                  .popAndPush(Routes.blogOverviewPage),
+        state.authFailureOrSuccessOption.fold(
+          () {},
+          (either) {
+            either.fold(
+              (failure) {
+                FlushbarHelper.createError(
+                  message: failure.map(
+                    // Use localized strings here in your apps
+                    serverError: (_) => 'Server error',
+                    emailAlreadyInUse: (_) => 'Email already in use',
+                    invalidEmailAndPasswordCombination: (_) =>
+                        'Invalid email and password combination',
+                  ),
+                ).show(context);
+              },
+              (_) => null,
             );
           },
-          orElse: () {},
         );
       },
       builder: (context, state) {
@@ -43,10 +52,16 @@ class LogInForm extends StatelessWidget {
                   labelText: 'Email',
                 ),
                 autocorrect: false,
-                onChanged: (value) {
-                  email = value;
-                },
-                //validator: (_) {},
+                onChanged: (value) =>
+                    context.read<AuthBloc>().add(AuthEvent.emailChanged(value)),
+                validator: (_) =>
+                    context.read<AuthBloc>().state.emailAddress.value.fold(
+                          (f) => f.maybeMap(
+                            invalidEmail: (_) => 'Invalid email',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
               ),
               const SizedBox(height: 8),
               TextFormField(
@@ -57,16 +72,22 @@ class LogInForm extends StatelessWidget {
                 ),
                 obscureText: true,
                 autocorrect: false,
-                onChanged: (value) {
-                  password = value;
-                },
-                //validator: (_) {},
+                onChanged: (value) => context
+                    .read<AuthBloc>()
+                    .add(AuthEvent.passwordChanged(value)),
+                validator: (_) =>
+                    context.read<AuthBloc>().state.password.value.fold(
+                          (f) => f.maybeMap(
+                            invalidEmail: (_) => 'Invalid password',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
               ),
               const SizedBox(height: 8),
               RaisedButton(
-                onPressed: () => context
-                    .read<AuthBloc>()
-                    .add(AuthEvent.login(email: email, password: password)),
+                onPressed: () =>
+                    context.read<AuthBloc>().add(AuthEvent.login()),
                 color: Colors.lightBlue,
                 child: const Text(
                   'SIGN IN',
