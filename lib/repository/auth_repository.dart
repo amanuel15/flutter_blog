@@ -28,11 +28,7 @@ class AuthRepository implements AuthRepositoryAbstract {
     final response = await dio.post(baseUrl + 'login',
         queryParameters: {'email': email, 'password': password});
     if (response.statusCode == 400) {
-      if (response.data == "Email Doesn't Exists") {
-        return left(AuthFailure.invalidEmailAndPasswordCombination());
-      } else {
-        return left(AuthFailure.invalidEmailAndPasswordCombination());
-      }
+      return left(AuthFailure.invalidEmailAndPasswordCombination());
     } else {
       final responseId = response.data._id;
       final responseToken = response.data.token;
@@ -50,10 +46,10 @@ class AuthRepository implements AuthRepositoryAbstract {
   Future<Either<AuthFailure, Unit>> register({
     @required EmailAddress email,
     @required Password password,
-    @required Name name,
+    //@required Name name,
   }) async {
     final response = await dio.post(baseUrl + 'register',
-        queryParameters: {'name': name, 'email': email, 'password': password});
+        queryParameters: {'email': email, 'password': password});
     if (response.statusCode == 400) {
       if (response.data == "Email Already Exists") {
         return left(AuthFailure.emailAlreadyInUse());

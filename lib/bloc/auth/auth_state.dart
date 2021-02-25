@@ -5,7 +5,7 @@ abstract class AuthState with _$AuthState {
   const factory AuthState({
     @required EmailAddress emailAddress,
     @required Password password,
-    @required Name name,
+    //@required Name name,
     @required bool showErrorMessages,
     @required bool isSubmitting,
     @required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
@@ -14,7 +14,7 @@ abstract class AuthState with _$AuthState {
   factory AuthState.initial() => AuthState(
         emailAddress: EmailAddress(''),
         password: Password(''),
-        name: Name(''),
+        //name: Name(''),
         showErrorMessages: false,
         isSubmitting: false,
         authFailureOrSuccessOption: none(),

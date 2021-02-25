@@ -14,7 +14,7 @@ part 'current_auth_bloc.freezed.dart';
 class CurrentAuthBloc extends Bloc<CurrentAuthEvent, CurrentAuthState> {
   final AuthRepositoryAbstract _authFacade;
 
-  CurrentAuthBloc(this._authFacade) : super(const CurrentAuthState.initial());
+  CurrentAuthBloc(this._authFacade) : super(CurrentAuthState.initial());
 
   @override
   Stream<CurrentAuthState> mapEventToState(

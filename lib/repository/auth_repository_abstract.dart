@@ -9,9 +9,10 @@ abstract class AuthRepositoryAbstract {
   Future<Option<User>> getSignedInUser();
   Future<Either<AuthFailure, Unit>> login(
       {@required EmailAddress email, @required Password password});
-  Future<Either<AuthFailure, Unit>> register(
-      {@required EmailAddress email,
-      @required Password password,
-      @required Name name});
+  Future<Either<AuthFailure, Unit>> register({
+    @required EmailAddress email,
+    @required Password password,
+    //@required Name name,
+  });
   Future logout();
 }

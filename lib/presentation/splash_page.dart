@@ -13,8 +13,7 @@ class SplashPage extends StatelessWidget {
           initial: (_) {},
           authenticated: (_) =>
               ExtendedNavigator.of(context).pushBlogOverviewPage(),
-          unauthenticated: (_) =>
-              ExtendedNavigator.of(context).pushSignUpPage(),
+          unauthenticated: (_) => ExtendedNavigator.of(context).pushLogInPage(),
         );
       },
       child: _PageWidget(),

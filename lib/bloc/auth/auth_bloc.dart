@@ -39,15 +39,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           authFailureOrSuccessOption: none(),
         );
       },
-      nameChanged: (e) async* {
-        yield state.copyWith(
-          emailAddress: EmailAddress(e.name),
-          authFailureOrSuccessOption: none(),
-        );
-      },
+      // nameChanged: (e) async* {
+      //   yield state.copyWith(
+      //     name: Name(e.name),
+      //     authFailureOrSuccessOption: none(),
+      //   );
+      // },
       passwordChanged: (e) async* {
         yield state.copyWith(
-          emailAddress: EmailAddress(e.password),
+          password: Password(e.password),
           authFailureOrSuccessOption: none(),
         );
       },
@@ -58,7 +58,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Future<Either<AuthFailure, Unit>> Function({
       @required EmailAddress email,
       @required Password password,
-      @required Name name,
+      //@required Name name,
     })
         forwardedCall,
   ) async* {
@@ -66,9 +66,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final isEmailValid = state.emailAddress.isValid();
     final isPasswordValid = state.password.isValid();
-    final isNameValid = state.name.isValid();
+    //final isNameValid = state.name.isValid();
 
-    if (isEmailValid && isPasswordValid && isNameValid) {
+    if (isEmailValid && isPasswordValid) {
       yield state.copyWith(
         isSubmitting: true,
         authFailureOrSuccessOption: none(),
@@ -77,7 +77,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       failureOrSuccess = await forwardedCall(
         email: state.emailAddress,
         password: state.password,
-        name: state.name,
+        //name: state.name,
       );
     }
     yield state.copyWith(

@@ -6,6 +6,8 @@ import 'package:idea_sharing/injectable.dart';
 import 'package:idea_sharing/routes/router.gr.dart' as rou;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(AppWidget());
 }
 

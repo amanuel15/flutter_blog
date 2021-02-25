@@ -78,7 +78,7 @@ class LogInForm extends StatelessWidget {
                 validator: (_) =>
                     context.read<AuthBloc>().state.password.value.fold(
                           (f) => f.maybeMap(
-                            invalidEmail: (_) => 'Invalid password',
+                            shortPassword: (_) => 'password too short. min 6',
                             orElse: () => null,
                           ),
                           (_) => null,

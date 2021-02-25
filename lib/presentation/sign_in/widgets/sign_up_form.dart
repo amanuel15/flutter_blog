@@ -26,16 +26,6 @@ class SignUpForm extends StatelessWidget {
               const SizedBox(height: 8),
               TextFormField(
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.perm_identity),
-                  labelText: 'Name',
-                ),
-                autocorrect: false,
-                onChanged: (_) {},
-                validator: (_) {},
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email),
                   labelText: 'Email',
                 ),
