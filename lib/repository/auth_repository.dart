@@ -13,12 +13,13 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 @LazySingleton(as: AuthRepositoryAbstract)
 class AuthRepository implements AuthRepositoryAbstract {
-  Dio dio = new Dio();
-  String token;
-  String id;
-  FlutterSecureStorage flutterSecureStorage;
-  String baseUrl = 'https://flutternode.herokuapp.com/api/user/';
-  AuthRepository(this.dio, this.flutterSecureStorage);
+  final Dio dio;
+  final FlutterSecureStorage flutterSecureStorage;
+
+  AuthRepository(
+    this.dio,
+    this.flutterSecureStorage,
+  );
 
   @override
   Future<Either<AuthFailure, Unit>> login({
@@ -36,18 +37,21 @@ class AuthRepository implements AuthRepositoryAbstract {
         //options: Options(contentType: Headers.formUrlEncodedContentType)
       );
 
-      // print(response.statusCode.toString() +
-      //     '\n with msg: ' +
-      //     response.statusMessage);
+      print('\nStatus code: ' +
+          response.statusCode.toString() +
+          ' with msg: ' +
+          response.statusMessage +
+          '\n');
 
-      // final responseId = response.data._id;
-      // final responseToken = response.data.token;
-      // await flutterSecureStorage
-      //     .write(key: id, value: responseId)
-      //     .catchError((err) => left(AuthFailure.serverError()));
-      // await flutterSecureStorage
-      //     .write(key: token, value: responseToken)
-      //     .catchError((err) => left(AuthFailure.serverError()));
+      final responseId = response.data['id'];
+      final responseToken = response.data['token'];
+      print('\nID: ' + responseId + '  token: ' + responseToken);
+      await flutterSecureStorage
+          .write(key: 'id', value: responseId)
+          .catchError((err) => left(AuthFailure.serverError()));
+      await flutterSecureStorage
+          .write(key: 'token', value: responseToken)
+          .catchError((err) => left(AuthFailure.serverError()));
       return right(unit);
     } on DioError catch (e) {
       Fluttertoast.showToast(
@@ -81,7 +85,8 @@ class AuthRepository implements AuthRepositoryAbstract {
     @required Password password,
     //@required Name name,
   }) async {
-    final response = await dio.post(baseUrl + 'register',
+    final response = await dio.post(
+        'https://flutternode.herokuapp.com/api/user/register',
         queryParameters: {'email': email, 'password': password});
     if (response.statusCode == 400) {
       if (response.data == "Email Already Exists") {
@@ -101,8 +106,8 @@ class AuthRepository implements AuthRepositoryAbstract {
 
   @override
   Future<Option<User>> getSignedInUser() async {
-    token = await flutterSecureStorage.read(key: 'token');
-    id = await flutterSecureStorage.read(key: 'id');
+    String token = await flutterSecureStorage.read(key: 'token');
+    String id = await flutterSecureStorage.read(key: 'id');
     if (token == null || id == null) {
       return optionOf(null);
     }
