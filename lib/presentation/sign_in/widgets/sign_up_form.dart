@@ -1,6 +1,10 @@
+import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_sharing/bloc/auth/auth_bloc.dart';
+import 'package:idea_sharing/bloc/auth/bloc/current_auth_bloc.dart';
+import 'package:idea_sharing/routes/router.gr.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({Key key}) : super(key: key);
@@ -9,7 +13,31 @@ class SignUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
-        //
+        state.authFailureOrSuccessOption.fold(
+          () {},
+          (either) {
+            either.fold(
+              (failure) {
+                FlushbarHelper.createError(
+                  message: failure.map(
+                    // Use localized strings here in your apps
+                    serverError: (_) => 'Server error',
+                    emailAlreadyInUse: (_) => 'Email already in use',
+                    invalidEmailAndPasswordCombination: (_) =>
+                        'Invalid email and password combination',
+                  ),
+                ).show(context);
+              },
+              (_) {
+                ExtendedNavigator.of(context)
+                    .popAndPush(Routes.blogOverviewPage);
+                context
+                    .read<CurrentAuthBloc>()
+                    .add(CurrentAuthEvent.authCheckRequested());
+              },
+            );
+          },
+        );
       },
       builder: (context, state) {
         return Form(
@@ -30,8 +58,16 @@ class SignUpForm extends StatelessWidget {
                   labelText: 'Email',
                 ),
                 autocorrect: false,
-                onChanged: (_) {},
-                validator: (_) {},
+                onChanged: (value) =>
+                    context.read<AuthBloc>().add(AuthEvent.emailChanged(value)),
+                validator: (_) =>
+                    context.read<AuthBloc>().state.emailAddress.value.fold(
+                          (f) => f.maybeMap(
+                            invalidEmail: (_) => 'Invalid email',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
               ),
               const SizedBox(height: 8),
               TextFormField(
@@ -42,12 +78,22 @@ class SignUpForm extends StatelessWidget {
                 ),
                 obscureText: true,
                 autocorrect: false,
-                onChanged: (value) => {},
-                validator: (_) {},
+                onChanged: (value) => context
+                    .read<AuthBloc>()
+                    .add(AuthEvent.passwordChanged(value)),
+                validator: (_) =>
+                    context.read<AuthBloc>().state.password.value.fold(
+                          (f) => f.maybeMap(
+                            shortPassword: (_) => 'password too short. min 6',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
               ),
               const SizedBox(height: 8),
               RaisedButton(
-                onPressed: () => {},
+                onPressed: () =>
+                    context.read<AuthBloc>().add(AuthEvent.register()),
                 color: Colors.lightBlue,
                 child: const Text(
                   'SIGN IN',

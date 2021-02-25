@@ -54,29 +54,19 @@ class AuthRepository implements AuthRepositoryAbstract {
           .catchError((err) => left(AuthFailure.serverError()));
       return right(unit);
     } on DioError catch (e) {
-      Fluttertoast.showToast(
-        msg: e.response.data['msg'].toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      // Fluttertoast.showToast(
+      //   msg: e.response.data['msg'].toString(),
+      //   toastLength: Toast.LENGTH_SHORT,
+      //   gravity: ToastGravity.BOTTOM,
+      //   backgroundColor: Colors.red,
+      //   textColor: Colors.white,
+      //   fontSize: 16.0,
+      // );
+      if (e.response.statusCode == 400) {
+        return left(AuthFailure.invalidEmailAndPasswordCombination());
+      }
       return left(AuthFailure.serverError());
     }
-    // if (response.statusCode == 400) {
-    //   return left(AuthFailure.invalidEmailAndPasswordCombination());
-    // } else {
-    //   final responseId = response.data._id;
-    //   final responseToken = response.data.token;
-    //   await flutterSecureStorage
-    //       .write(key: id, value: responseId)
-    //       .catchError((err) => left(AuthFailure.serverError()));
-    //   await flutterSecureStorage
-    //       .write(key: token, value: responseToken)
-    //       .catchError((err) => left(AuthFailure.serverError()));
-    //   return right(unit);
-    // }
   }
 
   @override
@@ -85,17 +75,22 @@ class AuthRepository implements AuthRepositoryAbstract {
     @required Password password,
     //@required Name name,
   }) async {
-    final response = await dio.post(
+    try {
+      final response = await dio.post(
         'https://flutternode.herokuapp.com/api/user/register',
-        queryParameters: {'email': email, 'password': password});
-    if (response.statusCode == 400) {
-      if (response.data == "Email Already Exists") {
+        data: {
+          'email': email.getOrCrash(),
+          'password': password.getOrCrash(),
+          'name': 'random person',
+        },
+      );
+
+      return login(email: email, password: password);
+    } on DioError catch (e) {
+      if (e.response.statusCode == 400) {
         return left(AuthFailure.emailAlreadyInUse());
-      } else {
-        return left(AuthFailure.invalidEmailAndPasswordCombination());
       }
-    } else {
-      return right(unit);
+      return left(AuthFailure.serverError());
     }
   }
 

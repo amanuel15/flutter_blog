@@ -24,13 +24,13 @@ class CurrentAuthBloc extends Bloc<CurrentAuthEvent, CurrentAuthState> {
       authCheckRequested: (e) async* {
         final userOption = await _authFacade.getSignedInUser();
         yield userOption.fold(
-          () => const CurrentAuthState.unauthenticated(),
+          () => CurrentAuthState.unauthenticated(),
           (user) => CurrentAuthState.authenticated(user),
         );
       },
       signedOut: (e) async* {
         await _authFacade.logout();
-        yield const CurrentAuthState.unauthenticated();
+        yield CurrentAuthState.unauthenticated();
       },
     );
   }
