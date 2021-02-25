@@ -21,13 +21,6 @@ class _$AuthEventTearOff {
   }
 
 // ignore: unused_element
-  NameChanged nameChanged(String name) {
-    return NameChanged(
-      name,
-    );
-  }
-
-// ignore: unused_element
   PasswordChanged passwordChanged(String password) {
     return PasswordChanged(
       password,
@@ -59,7 +52,6 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult emailChanged(String emailStr),
-    @required TResult nameChanged(String name),
     @required TResult passwordChanged(String password),
     @required TResult register(),
     @required TResult login(),
@@ -68,7 +60,6 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult emailChanged(String emailStr),
-    TResult nameChanged(String name),
     TResult passwordChanged(String password),
     TResult register(),
     TResult login(),
@@ -78,7 +69,6 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult emailChanged(EmailChanged value),
-    @required TResult nameChanged(NameChanged value),
     @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
@@ -87,7 +77,6 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult emailChanged(EmailChanged value),
-    TResult nameChanged(NameChanged value),
     TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
@@ -173,14 +162,12 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult emailChanged(String emailStr),
-    @required TResult nameChanged(String name),
     @required TResult passwordChanged(String password),
     @required TResult register(),
     @required TResult login(),
     @required TResult logout(),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -192,7 +179,6 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult emailChanged(String emailStr),
-    TResult nameChanged(String name),
     TResult passwordChanged(String password),
     TResult register(),
     TResult login(),
@@ -210,14 +196,12 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult emailChanged(EmailChanged value),
-    @required TResult nameChanged(NameChanged value),
     @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
     @required TResult logout(Logout value),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -229,7 +213,6 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult emailChanged(EmailChanged value),
-    TResult nameChanged(NameChanged value),
     TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
@@ -250,146 +233,6 @@ abstract class EmailChanged implements AuthEvent {
   String get emailStr;
   @JsonKey(ignore: true)
   $EmailChangedCopyWith<EmailChanged> get copyWith;
-}
-
-/// @nodoc
-abstract class $NameChangedCopyWith<$Res> {
-  factory $NameChangedCopyWith(
-          NameChanged value, $Res Function(NameChanged) then) =
-      _$NameChangedCopyWithImpl<$Res>;
-  $Res call({String name});
-}
-
-/// @nodoc
-class _$NameChangedCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
-    implements $NameChangedCopyWith<$Res> {
-  _$NameChangedCopyWithImpl(
-      NameChanged _value, $Res Function(NameChanged) _then)
-      : super(_value, (v) => _then(v as NameChanged));
-
-  @override
-  NameChanged get _value => super._value as NameChanged;
-
-  @override
-  $Res call({
-    Object name = freezed,
-  }) {
-    return _then(NameChanged(
-      name == freezed ? _value.name : name as String,
-    ));
-  }
-}
-
-/// @nodoc
-class _$NameChanged implements NameChanged {
-  const _$NameChanged(this.name) : assert(name != null);
-
-  @override
-  final String name;
-
-  @override
-  String toString() {
-    return 'AuthEvent.nameChanged(name: $name)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is NameChanged &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(name);
-
-  @JsonKey(ignore: true)
-  @override
-  $NameChangedCopyWith<NameChanged> get copyWith =>
-      _$NameChangedCopyWithImpl<NameChanged>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult emailChanged(String emailStr),
-    @required TResult nameChanged(String name),
-    @required TResult passwordChanged(String password),
-    @required TResult register(),
-    @required TResult login(),
-    @required TResult logout(),
-  }) {
-    assert(emailChanged != null);
-    assert(nameChanged != null);
-    assert(passwordChanged != null);
-    assert(register != null);
-    assert(login != null);
-    assert(logout != null);
-    return nameChanged(name);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult emailChanged(String emailStr),
-    TResult nameChanged(String name),
-    TResult passwordChanged(String password),
-    TResult register(),
-    TResult login(),
-    TResult logout(),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (nameChanged != null) {
-      return nameChanged(name);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult emailChanged(EmailChanged value),
-    @required TResult nameChanged(NameChanged value),
-    @required TResult passwordChanged(PasswordChanged value),
-    @required TResult register(Register value),
-    @required TResult login(Login value),
-    @required TResult logout(Logout value),
-  }) {
-    assert(emailChanged != null);
-    assert(nameChanged != null);
-    assert(passwordChanged != null);
-    assert(register != null);
-    assert(login != null);
-    assert(logout != null);
-    return nameChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult emailChanged(EmailChanged value),
-    TResult nameChanged(NameChanged value),
-    TResult passwordChanged(PasswordChanged value),
-    TResult register(Register value),
-    TResult login(Login value),
-    TResult logout(Logout value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (nameChanged != null) {
-      return nameChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class NameChanged implements AuthEvent {
-  const factory NameChanged(String name) = _$NameChanged;
-
-  String get name;
-  @JsonKey(ignore: true)
-  $NameChangedCopyWith<NameChanged> get copyWith;
 }
 
 /// @nodoc
@@ -454,14 +297,12 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult emailChanged(String emailStr),
-    @required TResult nameChanged(String name),
     @required TResult passwordChanged(String password),
     @required TResult register(),
     @required TResult login(),
     @required TResult logout(),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -473,7 +314,6 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult emailChanged(String emailStr),
-    TResult nameChanged(String name),
     TResult passwordChanged(String password),
     TResult register(),
     TResult login(),
@@ -491,14 +331,12 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult emailChanged(EmailChanged value),
-    @required TResult nameChanged(NameChanged value),
     @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
     @required TResult logout(Logout value),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -510,7 +348,6 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult emailChanged(EmailChanged value),
-    TResult nameChanged(NameChanged value),
     TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
@@ -570,14 +407,12 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult emailChanged(String emailStr),
-    @required TResult nameChanged(String name),
     @required TResult passwordChanged(String password),
     @required TResult register(),
     @required TResult login(),
     @required TResult logout(),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -589,7 +424,6 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult emailChanged(String emailStr),
-    TResult nameChanged(String name),
     TResult passwordChanged(String password),
     TResult register(),
     TResult login(),
@@ -607,14 +441,12 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult emailChanged(EmailChanged value),
-    @required TResult nameChanged(NameChanged value),
     @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
     @required TResult logout(Logout value),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -626,7 +458,6 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult emailChanged(EmailChanged value),
-    TResult nameChanged(NameChanged value),
     TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
@@ -682,14 +513,12 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult emailChanged(String emailStr),
-    @required TResult nameChanged(String name),
     @required TResult passwordChanged(String password),
     @required TResult register(),
     @required TResult login(),
     @required TResult logout(),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -701,7 +530,6 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult emailChanged(String emailStr),
-    TResult nameChanged(String name),
     TResult passwordChanged(String password),
     TResult register(),
     TResult login(),
@@ -719,14 +547,12 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult emailChanged(EmailChanged value),
-    @required TResult nameChanged(NameChanged value),
     @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
     @required TResult logout(Logout value),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -738,7 +564,6 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult emailChanged(EmailChanged value),
-    TResult nameChanged(NameChanged value),
     TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
@@ -794,14 +619,12 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult emailChanged(String emailStr),
-    @required TResult nameChanged(String name),
     @required TResult passwordChanged(String password),
     @required TResult register(),
     @required TResult login(),
     @required TResult logout(),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -813,7 +636,6 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult emailChanged(String emailStr),
-    TResult nameChanged(String name),
     TResult passwordChanged(String password),
     TResult register(),
     TResult login(),
@@ -831,14 +653,12 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult emailChanged(EmailChanged value),
-    @required TResult nameChanged(NameChanged value),
     @required TResult passwordChanged(PasswordChanged value),
     @required TResult register(Register value),
     @required TResult login(Login value),
     @required TResult logout(Logout value),
   }) {
     assert(emailChanged != null);
-    assert(nameChanged != null);
     assert(passwordChanged != null);
     assert(register != null);
     assert(login != null);
@@ -850,7 +670,6 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult emailChanged(EmailChanged value),
-    TResult nameChanged(NameChanged value),
     TResult passwordChanged(PasswordChanged value),
     TResult register(Register value),
     TResult login(Login value),
@@ -877,14 +696,12 @@ class _$AuthStateTearOff {
   _AuthState call(
       {@required EmailAddress emailAddress,
       @required Password password,
-      @required Name name,
       @required bool showErrorMessages,
       @required bool isSubmitting,
       @required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption}) {
     return _AuthState(
       emailAddress: emailAddress,
       password: password,
-      name: name,
       showErrorMessages: showErrorMessages,
       isSubmitting: isSubmitting,
       authFailureOrSuccessOption: authFailureOrSuccessOption,
@@ -899,8 +716,7 @@ const $AuthState = _$AuthStateTearOff();
 /// @nodoc
 mixin _$AuthState {
   EmailAddress get emailAddress;
-  Password get password;
-  Name get name;
+  Password get password; //@required Name name,
   bool get showErrorMessages;
   bool get isSubmitting;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
@@ -916,7 +732,6 @@ abstract class $AuthStateCopyWith<$Res> {
   $Res call(
       {EmailAddress emailAddress,
       Password password,
-      Name name,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -934,7 +749,6 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
   $Res call({
     Object emailAddress = freezed,
     Object password = freezed,
-    Object name = freezed,
     Object showErrorMessages = freezed,
     Object isSubmitting = freezed,
     Object authFailureOrSuccessOption = freezed,
@@ -944,7 +758,6 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
           ? _value.emailAddress
           : emailAddress as EmailAddress,
       password: password == freezed ? _value.password : password as Password,
-      name: name == freezed ? _value.name : name as Name,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
@@ -966,7 +779,6 @@ abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
   $Res call(
       {EmailAddress emailAddress,
       Password password,
-      Name name,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -985,7 +797,6 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
   $Res call({
     Object emailAddress = freezed,
     Object password = freezed,
-    Object name = freezed,
     Object showErrorMessages = freezed,
     Object isSubmitting = freezed,
     Object authFailureOrSuccessOption = freezed,
@@ -995,7 +806,6 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
           ? _value.emailAddress
           : emailAddress as EmailAddress,
       password: password == freezed ? _value.password : password as Password,
-      name: name == freezed ? _value.name : name as Name,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
@@ -1013,13 +823,11 @@ class _$_AuthState implements _AuthState {
   const _$_AuthState(
       {@required this.emailAddress,
       @required this.password,
-      @required this.name,
       @required this.showErrorMessages,
       @required this.isSubmitting,
       @required this.authFailureOrSuccessOption})
       : assert(emailAddress != null),
         assert(password != null),
-        assert(name != null),
         assert(showErrorMessages != null),
         assert(isSubmitting != null),
         assert(authFailureOrSuccessOption != null);
@@ -1028,9 +836,7 @@ class _$_AuthState implements _AuthState {
   final EmailAddress emailAddress;
   @override
   final Password password;
-  @override
-  final Name name;
-  @override
+  @override //@required Name name,
   final bool showErrorMessages;
   @override
   final bool isSubmitting;
@@ -1039,7 +845,7 @@ class _$_AuthState implements _AuthState {
 
   @override
   String toString() {
-    return 'AuthState(emailAddress: $emailAddress, password: $password, name: $name, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'AuthState(emailAddress: $emailAddress, password: $password, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -1052,8 +858,6 @@ class _$_AuthState implements _AuthState {
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 const DeepCollectionEquality()
                     .equals(other.showErrorMessages, showErrorMessages)) &&
@@ -1072,7 +876,6 @@ class _$_AuthState implements _AuthState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(emailAddress) ^
       const DeepCollectionEquality().hash(password) ^
-      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(showErrorMessages) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(authFailureOrSuccessOption);
@@ -1090,8 +893,6 @@ abstract class _AuthState implements AuthState {
           @required
               Password password,
           @required
-              Name name,
-          @required
               bool showErrorMessages,
           @required
               bool isSubmitting,
@@ -1103,9 +904,7 @@ abstract class _AuthState implements AuthState {
   EmailAddress get emailAddress;
   @override
   Password get password;
-  @override
-  Name get name;
-  @override
+  @override //@required Name name,
   bool get showErrorMessages;
   @override
   bool get isSubmitting;

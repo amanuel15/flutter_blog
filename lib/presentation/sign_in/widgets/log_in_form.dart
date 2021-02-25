@@ -10,7 +10,6 @@ class LogInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var email, password, token;
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         state.authFailureOrSuccessOption.fold(

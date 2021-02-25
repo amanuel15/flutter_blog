@@ -12,8 +12,9 @@ class SplashPage extends StatelessWidget {
         state.map(
           initial: (_) {},
           authenticated: (_) =>
-              ExtendedNavigator.of(context).pushBlogOverviewPage(),
-          unauthenticated: (_) => ExtendedNavigator.of(context).pushLogInPage(),
+              ExtendedNavigator.of(context).popAndPush(Routes.blogOverviewPage),
+          unauthenticated: (_) =>
+              ExtendedNavigator.of(context).popAndPush(Routes.logInPage),
         );
       },
       child: _PageWidget(),
