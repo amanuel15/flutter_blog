@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:idea_sharing/failures/post_failures.dart';
+import 'package:idea_sharing/failures/blog_failure.dart';
 import 'package:idea_sharing/models/blog.dart';
 import 'package:idea_sharing/repository/blog_repository_abstract.dart';
 import 'package:injectable/injectable.dart';
@@ -134,6 +134,12 @@ class BlogRepository implements BlogRepositoryAbstract {
     } on DioError catch (e) {
       return left(BlogFailures.unexpected());
     }
+  }
+
+  @override
+  Future<Either<BlogFailures, Unit>> updateBlog(Blog blog) {
+    // TODO: implement updateBlog
+    throw UnimplementedError();
   }
 
   // @override

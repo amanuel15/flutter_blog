@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_sharing/bloc/auth/bloc/current_auth_bloc.dart';
+import 'package:idea_sharing/presentation/blog_overview/widgets/blog_overview_body.dart';
 import 'package:idea_sharing/routes/router.gr.dart';
 
 class BlogOverviewPage extends StatelessWidget {
@@ -35,8 +36,24 @@ class BlogOverviewPage extends StatelessWidget {
             ),
           ],
         ),
-        body: Center(
-          child: Text('Blogs'),
+        body: ListView(
+          padding: EdgeInsets.symmetric(vertical: 20.0),
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 120.0),
+              child: Text(
+                'Blogs Feed',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            BlogOverviewBody(),
+          ],
         ),
       ),
     );

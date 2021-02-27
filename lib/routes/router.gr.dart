@@ -9,6 +9,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../models/blog.dart';
+import '../presentation/blog_form/blog_form_page.dart';
 import '../presentation/blog_overview/blog_overview_page.dart';
 import '../presentation/sign_in/log_in_page.dart';
 import '../presentation/sign_in/sign_up_page.dart';
@@ -19,11 +21,13 @@ class Routes {
   static const String logInPage = '/log-in-page';
   static const String signUpPage = '/sign-up-page';
   static const String blogOverviewPage = '/blog-overview-page';
+  static const String blogFormPage = '/blog-form-page';
   static const all = <String>{
     splashPage,
     logInPage,
     signUpPage,
     blogOverviewPage,
+    blogFormPage,
   };
 }
 
@@ -35,6 +39,7 @@ class Router extends RouterBase {
     RouteDef(Routes.logInPage, page: LogInPage),
     RouteDef(Routes.signUpPage, page: SignUpPage),
     RouteDef(Routes.blogOverviewPage, page: BlogOverviewPage),
+    RouteDef(Routes.blogFormPage, page: BlogFormPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -63,6 +68,16 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    BlogFormPage: (data) {
+      final args = data.getArgs<BlogFormPageArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => BlogFormPage(
+          key: args.key,
+          editedBlog: args.editedBlog,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -79,4 +94,24 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushBlogOverviewPage() =>
       push<dynamic>(Routes.blogOverviewPage);
+
+  Future<dynamic> pushBlogFormPage({
+    Key key,
+    @required Blog editedBlog,
+  }) =>
+      push<dynamic>(
+        Routes.blogFormPage,
+        arguments: BlogFormPageArguments(key: key, editedBlog: editedBlog),
+      );
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// BlogFormPage arguments holder class
+class BlogFormPageArguments {
+  final Key key;
+  final Blog editedBlog;
+  BlogFormPageArguments({this.key, @required this.editedBlog});
 }

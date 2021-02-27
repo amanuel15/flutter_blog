@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'post_failures.freezed.dart';
+part 'blog_failure.freezed.dart';
 
 @freezed
 abstract class BlogFailures with _$BlogFailures {

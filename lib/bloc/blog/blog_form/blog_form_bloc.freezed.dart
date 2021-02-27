@@ -33,6 +33,11 @@ class _$BlogFormEventTearOff {
       body,
     );
   }
+
+// ignore: unused_element
+  _Saved saved() {
+    return const _Saved();
+  }
 }
 
 /// @nodoc
@@ -46,12 +51,14 @@ mixin _$BlogFormEvent {
     @required TResult initalized(Blog initialBlog),
     @required TResult titleChanged(String title),
     @required TResult bodyChanged(String body),
+    @required TResult saved(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult initalized(Blog initialBlog),
     TResult titleChanged(String title),
     TResult bodyChanged(String body),
+    TResult saved(),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -59,12 +66,14 @@ mixin _$BlogFormEvent {
     @required TResult initalized(_Initalized value),
     @required TResult titleChanged(_TitleChanged value),
     @required TResult bodyChanged(_BodyChanged value),
+    @required TResult saved(_Saved value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult initalized(_Initalized value),
     TResult titleChanged(_TitleChanged value),
     TResult bodyChanged(_BodyChanged value),
+    TResult saved(_Saved value),
     @required TResult orElse(),
   });
 }
@@ -162,10 +171,12 @@ class _$_Initalized implements _Initalized {
     @required TResult initalized(Blog initialBlog),
     @required TResult titleChanged(String title),
     @required TResult bodyChanged(String body),
+    @required TResult saved(),
   }) {
     assert(initalized != null);
     assert(titleChanged != null);
     assert(bodyChanged != null);
+    assert(saved != null);
     return initalized(initialBlog);
   }
 
@@ -175,6 +186,7 @@ class _$_Initalized implements _Initalized {
     TResult initalized(Blog initialBlog),
     TResult titleChanged(String title),
     TResult bodyChanged(String body),
+    TResult saved(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -190,10 +202,12 @@ class _$_Initalized implements _Initalized {
     @required TResult initalized(_Initalized value),
     @required TResult titleChanged(_TitleChanged value),
     @required TResult bodyChanged(_BodyChanged value),
+    @required TResult saved(_Saved value),
   }) {
     assert(initalized != null);
     assert(titleChanged != null);
     assert(bodyChanged != null);
+    assert(saved != null);
     return initalized(this);
   }
 
@@ -203,6 +217,7 @@ class _$_Initalized implements _Initalized {
     TResult initalized(_Initalized value),
     TResult titleChanged(_TitleChanged value),
     TResult bodyChanged(_BodyChanged value),
+    TResult saved(_Saved value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -285,10 +300,12 @@ class _$_TitleChanged implements _TitleChanged {
     @required TResult initalized(Blog initialBlog),
     @required TResult titleChanged(String title),
     @required TResult bodyChanged(String body),
+    @required TResult saved(),
   }) {
     assert(initalized != null);
     assert(titleChanged != null);
     assert(bodyChanged != null);
+    assert(saved != null);
     return titleChanged(title);
   }
 
@@ -298,6 +315,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult initalized(Blog initialBlog),
     TResult titleChanged(String title),
     TResult bodyChanged(String body),
+    TResult saved(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -313,10 +331,12 @@ class _$_TitleChanged implements _TitleChanged {
     @required TResult initalized(_Initalized value),
     @required TResult titleChanged(_TitleChanged value),
     @required TResult bodyChanged(_BodyChanged value),
+    @required TResult saved(_Saved value),
   }) {
     assert(initalized != null);
     assert(titleChanged != null);
     assert(bodyChanged != null);
+    assert(saved != null);
     return titleChanged(this);
   }
 
@@ -326,6 +346,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult initalized(_Initalized value),
     TResult titleChanged(_TitleChanged value),
     TResult bodyChanged(_BodyChanged value),
+    TResult saved(_Saved value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -407,10 +428,12 @@ class _$_BodyChanged implements _BodyChanged {
     @required TResult initalized(Blog initialBlog),
     @required TResult titleChanged(String title),
     @required TResult bodyChanged(String body),
+    @required TResult saved(),
   }) {
     assert(initalized != null);
     assert(titleChanged != null);
     assert(bodyChanged != null);
+    assert(saved != null);
     return bodyChanged(body);
   }
 
@@ -420,6 +443,7 @@ class _$_BodyChanged implements _BodyChanged {
     TResult initalized(Blog initialBlog),
     TResult titleChanged(String title),
     TResult bodyChanged(String body),
+    TResult saved(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -435,10 +459,12 @@ class _$_BodyChanged implements _BodyChanged {
     @required TResult initalized(_Initalized value),
     @required TResult titleChanged(_TitleChanged value),
     @required TResult bodyChanged(_BodyChanged value),
+    @required TResult saved(_Saved value),
   }) {
     assert(initalized != null);
     assert(titleChanged != null);
     assert(bodyChanged != null);
+    assert(saved != null);
     return bodyChanged(this);
   }
 
@@ -448,6 +474,7 @@ class _$_BodyChanged implements _BodyChanged {
     TResult initalized(_Initalized value),
     TResult titleChanged(_TitleChanged value),
     TResult bodyChanged(_BodyChanged value),
+    TResult saved(_Saved value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -467,18 +494,127 @@ abstract class _BodyChanged implements BlogFormEvent {
 }
 
 /// @nodoc
+abstract class _$SavedCopyWith<$Res> {
+  factory _$SavedCopyWith(_Saved value, $Res Function(_Saved) then) =
+      __$SavedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SavedCopyWithImpl<$Res> extends _$BlogFormEventCopyWithImpl<$Res>
+    implements _$SavedCopyWith<$Res> {
+  __$SavedCopyWithImpl(_Saved _value, $Res Function(_Saved) _then)
+      : super(_value, (v) => _then(v as _Saved));
+
+  @override
+  _Saved get _value => super._value as _Saved;
+}
+
+/// @nodoc
+class _$_Saved implements _Saved {
+  const _$_Saved();
+
+  @override
+  String toString() {
+    return 'BlogFormEvent.saved()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Saved);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult initalized(Blog initialBlog),
+    @required TResult titleChanged(String title),
+    @required TResult bodyChanged(String body),
+    @required TResult saved(),
+  }) {
+    assert(initalized != null);
+    assert(titleChanged != null);
+    assert(bodyChanged != null);
+    assert(saved != null);
+    return saved();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult initalized(Blog initialBlog),
+    TResult titleChanged(String title),
+    TResult bodyChanged(String body),
+    TResult saved(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (saved != null) {
+      return saved();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult initalized(_Initalized value),
+    @required TResult titleChanged(_TitleChanged value),
+    @required TResult bodyChanged(_BodyChanged value),
+    @required TResult saved(_Saved value),
+  }) {
+    assert(initalized != null);
+    assert(titleChanged != null);
+    assert(bodyChanged != null);
+    assert(saved != null);
+    return saved(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult initalized(_Initalized value),
+    TResult titleChanged(_TitleChanged value),
+    TResult bodyChanged(_BodyChanged value),
+    TResult saved(_Saved value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (saved != null) {
+      return saved(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Saved implements BlogFormEvent {
+  const factory _Saved() = _$_Saved;
+}
+
+/// @nodoc
 class _$BlogFormStateTearOff {
   const _$BlogFormStateTearOff();
 
 // ignore: unused_element
   _BlogFormState call(
-      {@required Blog blog,
-      @required bool isEditing,
-      @required bool isSaving}) {
+      {@required
+          Blog blog,
+      @required
+          bool isEditing,
+      @required
+          bool isSaving,
+      @required
+          bool showErrorMessages,
+      @required
+          Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption}) {
     return _BlogFormState(
       blog: blog,
       isEditing: isEditing,
       isSaving: isSaving,
+      showErrorMessages: showErrorMessages,
+      saveFailureOrSuccessOption: saveFailureOrSuccessOption,
     );
   }
 }
@@ -492,6 +628,8 @@ mixin _$BlogFormState {
   Blog get blog;
   bool get isEditing;
   bool get isSaving;
+  bool get showErrorMessages;
+  Option<Either<BlogFailures, Unit>> get saveFailureOrSuccessOption;
 
   @JsonKey(ignore: true)
   $BlogFormStateCopyWith<BlogFormState> get copyWith;
@@ -502,7 +640,12 @@ abstract class $BlogFormStateCopyWith<$Res> {
   factory $BlogFormStateCopyWith(
           BlogFormState value, $Res Function(BlogFormState) then) =
       _$BlogFormStateCopyWithImpl<$Res>;
-  $Res call({Blog blog, bool isEditing, bool isSaving});
+  $Res call(
+      {Blog blog,
+      bool isEditing,
+      bool isSaving,
+      bool showErrorMessages,
+      Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption});
 
   $BlogCopyWith<$Res> get blog;
 }
@@ -521,11 +664,19 @@ class _$BlogFormStateCopyWithImpl<$Res>
     Object blog = freezed,
     Object isEditing = freezed,
     Object isSaving = freezed,
+    Object showErrorMessages = freezed,
+    Object saveFailureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
       blog: blog == freezed ? _value.blog : blog as Blog,
       isEditing: isEditing == freezed ? _value.isEditing : isEditing as bool,
       isSaving: isSaving == freezed ? _value.isSaving : isSaving as bool,
+      showErrorMessages: showErrorMessages == freezed
+          ? _value.showErrorMessages
+          : showErrorMessages as bool,
+      saveFailureOrSuccessOption: saveFailureOrSuccessOption == freezed
+          ? _value.saveFailureOrSuccessOption
+          : saveFailureOrSuccessOption as Option<Either<BlogFailures, Unit>>,
     ));
   }
 
@@ -547,7 +698,12 @@ abstract class _$BlogFormStateCopyWith<$Res>
           _BlogFormState value, $Res Function(_BlogFormState) then) =
       __$BlogFormStateCopyWithImpl<$Res>;
   @override
-  $Res call({Blog blog, bool isEditing, bool isSaving});
+  $Res call(
+      {Blog blog,
+      bool isEditing,
+      bool isSaving,
+      bool showErrorMessages,
+      Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption});
 
   @override
   $BlogCopyWith<$Res> get blog;
@@ -569,11 +725,19 @@ class __$BlogFormStateCopyWithImpl<$Res>
     Object blog = freezed,
     Object isEditing = freezed,
     Object isSaving = freezed,
+    Object showErrorMessages = freezed,
+    Object saveFailureOrSuccessOption = freezed,
   }) {
     return _then(_BlogFormState(
       blog: blog == freezed ? _value.blog : blog as Blog,
       isEditing: isEditing == freezed ? _value.isEditing : isEditing as bool,
       isSaving: isSaving == freezed ? _value.isSaving : isSaving as bool,
+      showErrorMessages: showErrorMessages == freezed
+          ? _value.showErrorMessages
+          : showErrorMessages as bool,
+      saveFailureOrSuccessOption: saveFailureOrSuccessOption == freezed
+          ? _value.saveFailureOrSuccessOption
+          : saveFailureOrSuccessOption as Option<Either<BlogFailures, Unit>>,
     ));
   }
 }
@@ -581,10 +745,16 @@ class __$BlogFormStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_BlogFormState implements _BlogFormState {
   const _$_BlogFormState(
-      {@required this.blog, @required this.isEditing, @required this.isSaving})
+      {@required this.blog,
+      @required this.isEditing,
+      @required this.isSaving,
+      @required this.showErrorMessages,
+      @required this.saveFailureOrSuccessOption})
       : assert(blog != null),
         assert(isEditing != null),
-        assert(isSaving != null);
+        assert(isSaving != null),
+        assert(showErrorMessages != null),
+        assert(saveFailureOrSuccessOption != null);
 
   @override
   final Blog blog;
@@ -592,10 +762,14 @@ class _$_BlogFormState implements _BlogFormState {
   final bool isEditing;
   @override
   final bool isSaving;
+  @override
+  final bool showErrorMessages;
+  @override
+  final Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'BlogFormState(blog: $blog, isEditing: $isEditing, isSaving: $isSaving)';
+    return 'BlogFormState(blog: $blog, isEditing: $isEditing, isSaving: $isSaving, showErrorMessages: $showErrorMessages, saveFailureOrSuccessOption: $saveFailureOrSuccessOption)';
   }
 
   @override
@@ -609,7 +783,15 @@ class _$_BlogFormState implements _BlogFormState {
                     .equals(other.isEditing, isEditing)) &&
             (identical(other.isSaving, isSaving) ||
                 const DeepCollectionEquality()
-                    .equals(other.isSaving, isSaving)));
+                    .equals(other.isSaving, isSaving)) &&
+            (identical(other.showErrorMessages, showErrorMessages) ||
+                const DeepCollectionEquality()
+                    .equals(other.showErrorMessages, showErrorMessages)) &&
+            (identical(other.saveFailureOrSuccessOption,
+                    saveFailureOrSuccessOption) ||
+                const DeepCollectionEquality().equals(
+                    other.saveFailureOrSuccessOption,
+                    saveFailureOrSuccessOption)));
   }
 
   @override
@@ -617,7 +799,9 @@ class _$_BlogFormState implements _BlogFormState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(blog) ^
       const DeepCollectionEquality().hash(isEditing) ^
-      const DeepCollectionEquality().hash(isSaving);
+      const DeepCollectionEquality().hash(isSaving) ^
+      const DeepCollectionEquality().hash(showErrorMessages) ^
+      const DeepCollectionEquality().hash(saveFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -627,9 +811,17 @@ class _$_BlogFormState implements _BlogFormState {
 
 abstract class _BlogFormState implements BlogFormState {
   const factory _BlogFormState(
-      {@required Blog blog,
-      @required bool isEditing,
-      @required bool isSaving}) = _$_BlogFormState;
+          {@required
+              Blog blog,
+          @required
+              bool isEditing,
+          @required
+              bool isSaving,
+          @required
+              bool showErrorMessages,
+          @required
+              Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption}) =
+      _$_BlogFormState;
 
   @override
   Blog get blog;
@@ -637,6 +829,10 @@ abstract class _BlogFormState implements BlogFormState {
   bool get isEditing;
   @override
   bool get isSaving;
+  @override
+  bool get showErrorMessages;
+  @override
+  Option<Either<BlogFailures, Unit>> get saveFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$BlogFormStateCopyWith<_BlogFormState> get copyWith;
