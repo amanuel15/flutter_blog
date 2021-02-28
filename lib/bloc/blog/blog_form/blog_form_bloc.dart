@@ -50,7 +50,7 @@ class BlogFormBloc extends Bloc<BlogFormEvent, BlogFormState> {
         );
 
         failureOrSuccess = state.isEditing
-            ? await _blogRepository.updateBlog(state.blog)
+            ? await _blogRepository.createBlog(state.blog)
             : await _blogRepository.createBlog(state.blog);
 
         yield state.copyWith(

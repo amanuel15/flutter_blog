@@ -19,6 +19,7 @@ class _$BlogTearOff {
 // ignore: unused_element
   _Blog call(
       {@required String userEmail,
+      @required String userId,
       @required String title,
       @required String body,
       List<dynamic> likes,
@@ -26,6 +27,7 @@ class _$BlogTearOff {
       String blogId}) {
     return _Blog(
       userEmail: userEmail,
+      userId: userId,
       title: title,
       body: body,
       likes: likes,
@@ -48,6 +50,7 @@ const $Blog = _$BlogTearOff();
 mixin _$Blog {
 //@required String imageUrl,
   String get userEmail;
+  String get userId;
   String get title;
   String get body;
   List<dynamic> get likes;
@@ -65,6 +68,7 @@ abstract class $BlogCopyWith<$Res> {
       _$BlogCopyWithImpl<$Res>;
   $Res call(
       {String userEmail,
+      String userId,
       String title,
       String body,
       List<dynamic> likes,
@@ -83,6 +87,7 @@ class _$BlogCopyWithImpl<$Res> implements $BlogCopyWith<$Res> {
   @override
   $Res call({
     Object userEmail = freezed,
+    Object userId = freezed,
     Object title = freezed,
     Object body = freezed,
     Object likes = freezed,
@@ -91,6 +96,7 @@ class _$BlogCopyWithImpl<$Res> implements $BlogCopyWith<$Res> {
   }) {
     return _then(_value.copyWith(
       userEmail: userEmail == freezed ? _value.userEmail : userEmail as String,
+      userId: userId == freezed ? _value.userId : userId as String,
       title: title == freezed ? _value.title : title as String,
       body: body == freezed ? _value.body : body as String,
       likes: likes == freezed ? _value.likes : likes as List<dynamic>,
@@ -108,6 +114,7 @@ abstract class _$BlogCopyWith<$Res> implements $BlogCopyWith<$Res> {
   @override
   $Res call(
       {String userEmail,
+      String userId,
       String title,
       String body,
       List<dynamic> likes,
@@ -127,6 +134,7 @@ class __$BlogCopyWithImpl<$Res> extends _$BlogCopyWithImpl<$Res>
   @override
   $Res call({
     Object userEmail = freezed,
+    Object userId = freezed,
     Object title = freezed,
     Object body = freezed,
     Object likes = freezed,
@@ -135,6 +143,7 @@ class __$BlogCopyWithImpl<$Res> extends _$BlogCopyWithImpl<$Res>
   }) {
     return _then(_Blog(
       userEmail: userEmail == freezed ? _value.userEmail : userEmail as String,
+      userId: userId == freezed ? _value.userId : userId as String,
       title: title == freezed ? _value.title : title as String,
       body: body == freezed ? _value.body : body as String,
       likes: likes == freezed ? _value.likes : likes as List<dynamic>,
@@ -151,12 +160,14 @@ class __$BlogCopyWithImpl<$Res> extends _$BlogCopyWithImpl<$Res>
 class _$_Blog implements _Blog {
   const _$_Blog(
       {@required this.userEmail,
+      @required this.userId,
       @required this.title,
       @required this.body,
       this.likes,
       this.comments,
       this.blogId})
       : assert(userEmail != null),
+        assert(userId != null),
         assert(title != null),
         assert(body != null);
 
@@ -165,6 +176,8 @@ class _$_Blog implements _Blog {
 
   @override //@required String imageUrl,
   final String userEmail;
+  @override
+  final String userId;
   @override
   final String title;
   @override
@@ -178,7 +191,7 @@ class _$_Blog implements _Blog {
 
   @override
   String toString() {
-    return 'Blog(userEmail: $userEmail, title: $title, body: $body, likes: $likes, comments: $comments, blogId: $blogId)';
+    return 'Blog(userEmail: $userEmail, userId: $userId, title: $title, body: $body, likes: $likes, comments: $comments, blogId: $blogId)';
   }
 
   @override
@@ -188,6 +201,8 @@ class _$_Blog implements _Blog {
             (identical(other.userEmail, userEmail) ||
                 const DeepCollectionEquality()
                     .equals(other.userEmail, userEmail)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.body, body) ||
@@ -205,6 +220,7 @@ class _$_Blog implements _Blog {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(userEmail) ^
+      const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(body) ^
       const DeepCollectionEquality().hash(likes) ^
@@ -225,6 +241,7 @@ class _$_Blog implements _Blog {
 abstract class _Blog implements Blog {
   const factory _Blog(
       {@required String userEmail,
+      @required String userId,
       @required String title,
       @required String body,
       List<dynamic> likes,
@@ -235,6 +252,8 @@ abstract class _Blog implements Blog {
 
   @override //@required String imageUrl,
   String get userEmail;
+  @override
+  String get userId;
   @override
   String get title;
   @override
@@ -260,13 +279,13 @@ class _$CommentTearOff {
 
 // ignore: unused_element
   _Comment call(
-      {@required String userEmail,
-      @required String comment,
-      String commentId}) {
+      {@required String userId,
+      @required String userEmail,
+      @required String comment}) {
     return _Comment(
+      userId: userId,
       userEmail: userEmail,
       comment: comment,
-      commentId: commentId,
     );
   }
 
@@ -282,9 +301,9 @@ const $Comment = _$CommentTearOff();
 
 /// @nodoc
 mixin _$Comment {
+  String get userId;
   String get userEmail;
   String get comment;
-  String get commentId;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -295,7 +314,7 @@ mixin _$Comment {
 abstract class $CommentCopyWith<$Res> {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
       _$CommentCopyWithImpl<$Res>;
-  $Res call({String userEmail, String comment, String commentId});
+  $Res call({String userId, String userEmail, String comment});
 }
 
 /// @nodoc
@@ -308,14 +327,14 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
 
   @override
   $Res call({
+    Object userId = freezed,
     Object userEmail = freezed,
     Object comment = freezed,
-    Object commentId = freezed,
   }) {
     return _then(_value.copyWith(
+      userId: userId == freezed ? _value.userId : userId as String,
       userEmail: userEmail == freezed ? _value.userEmail : userEmail as String,
       comment: comment == freezed ? _value.comment : comment as String,
-      commentId: commentId == freezed ? _value.commentId : commentId as String,
     ));
   }
 }
@@ -325,7 +344,7 @@ abstract class _$CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
   factory _$CommentCopyWith(_Comment value, $Res Function(_Comment) then) =
       __$CommentCopyWithImpl<$Res>;
   @override
-  $Res call({String userEmail, String comment, String commentId});
+  $Res call({String userId, String userEmail, String comment});
 }
 
 /// @nodoc
@@ -339,14 +358,14 @@ class __$CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object userId = freezed,
     Object userEmail = freezed,
     Object comment = freezed,
-    Object commentId = freezed,
   }) {
     return _then(_Comment(
+      userId: userId == freezed ? _value.userId : userId as String,
       userEmail: userEmail == freezed ? _value.userEmail : userEmail as String,
       comment: comment == freezed ? _value.comment : comment as String,
-      commentId: commentId == freezed ? _value.commentId : commentId as String,
     ));
   }
 }
@@ -356,8 +375,9 @@ class __$CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
 /// @nodoc
 class _$_Comment extends _Comment {
   const _$_Comment(
-      {@required this.userEmail, @required this.comment, this.commentId})
-      : assert(userEmail != null),
+      {@required this.userId, @required this.userEmail, @required this.comment})
+      : assert(userId != null),
+        assert(userEmail != null),
         assert(comment != null),
         super._();
 
@@ -365,38 +385,36 @@ class _$_Comment extends _Comment {
       _$_$_CommentFromJson(json);
 
   @override
+  final String userId;
+  @override
   final String userEmail;
   @override
   final String comment;
-  @override
-  final String commentId;
 
   @override
   String toString() {
-    return 'Comment(userEmail: $userEmail, comment: $comment, commentId: $commentId)';
+    return 'Comment(userId: $userId, userEmail: $userEmail, comment: $comment)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Comment &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.userEmail, userEmail) ||
                 const DeepCollectionEquality()
                     .equals(other.userEmail, userEmail)) &&
             (identical(other.comment, comment) ||
-                const DeepCollectionEquality()
-                    .equals(other.comment, comment)) &&
-            (identical(other.commentId, commentId) ||
-                const DeepCollectionEquality()
-                    .equals(other.commentId, commentId)));
+                const DeepCollectionEquality().equals(other.comment, comment)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(userEmail) ^
-      const DeepCollectionEquality().hash(comment) ^
-      const DeepCollectionEquality().hash(commentId);
+      const DeepCollectionEquality().hash(comment);
 
   @JsonKey(ignore: true)
   @override
@@ -412,18 +430,18 @@ class _$_Comment extends _Comment {
 abstract class _Comment extends Comment {
   const _Comment._() : super._();
   const factory _Comment(
-      {@required String userEmail,
-      @required String comment,
-      String commentId}) = _$_Comment;
+      {@required String userId,
+      @required String userEmail,
+      @required String comment}) = _$_Comment;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
 
   @override
+  String get userId;
+  @override
   String get userEmail;
   @override
   String get comment;
-  @override
-  String get commentId;
   @override
   @JsonKey(ignore: true)
   _$CommentCopyWith<_Comment> get copyWith;

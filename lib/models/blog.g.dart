@@ -9,6 +9,7 @@ part of 'blog.dart';
 _$_Blog _$_$_BlogFromJson(Map<String, dynamic> json) {
   return _$_Blog(
     userEmail: json['userEmail'] as String,
+    userId: json['userId'] as String,
     title: json['title'] as String,
     body: json['body'] as String,
     likes: json['likes'] as List,
@@ -22,6 +23,7 @@ _$_Blog _$_$_BlogFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_BlogToJson(_$_Blog instance) => <String, dynamic>{
       'userEmail': instance.userEmail,
+      'userId': instance.userId,
       'title': instance.title,
       'body': instance.body,
       'likes': instance.likes,
@@ -31,15 +33,15 @@ Map<String, dynamic> _$_$_BlogToJson(_$_Blog instance) => <String, dynamic>{
 
 _$_Comment _$_$_CommentFromJson(Map<String, dynamic> json) {
   return _$_Comment(
+    userId: json['userId'] as String,
     userEmail: json['userEmail'] as String,
     comment: json['comment'] as String,
-    commentId: json['commentId'] as String,
   );
 }
 
 Map<String, dynamic> _$_$_CommentToJson(_$_Comment instance) =>
     <String, dynamic>{
+      'userId': instance.userId,
       'userEmail': instance.userEmail,
       'comment': instance.comment,
-      'commentId': instance.commentId,
     };

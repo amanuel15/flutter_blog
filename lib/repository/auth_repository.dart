@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:idea_sharing/failures/auth_failures.dart';
@@ -52,6 +53,9 @@ class AuthRepository implements AuthRepositoryAbstract {
       await flutterSecureStorage
           .write(key: 'token', value: responseToken)
           .catchError((err) => left(AuthFailure.serverError()));
+      await flutterSecureStorage
+          .write(key: 'email', value: email.getOrCrash())
+          .catchError((err) => left(AuthFailure.serverError()));
       return right(unit);
     } on DioError catch (e) {
       // Fluttertoast.showToast(
@@ -103,10 +107,11 @@ class AuthRepository implements AuthRepositoryAbstract {
   Future<Option<User>> getSignedInUser() async {
     String token = await flutterSecureStorage.read(key: 'token');
     String id = await flutterSecureStorage.read(key: 'id');
+    String email = await flutterSecureStorage.read(key: 'email');
     if (token == null || id == null) {
       return optionOf(null);
     }
-    final user = User(id: id, token: token);
+    final user = User(userId: id, token: token, userEmail: email);
     return optionOf(user);
   }
 }

@@ -1,14 +1,16 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:idea_sharing/bloc/blog/blog_form/blog_form_bloc.dart';
 import 'package:idea_sharing/injectable.dart';
 import 'package:idea_sharing/models/blog.dart';
+import 'package:idea_sharing/presentation/blog_form/widgets/body_field_widget.dart';
+import 'package:idea_sharing/presentation/blog_form/widgets/title_field_widget.dart';
 import 'package:idea_sharing/routes/router.gr.dart';
 
-class BlogFormPage extends StatelessWidget {
+class BlogFormPage extends HookWidget {
   final Blog editedBlog;
 
   const BlogFormPage({Key key, @required this.editedBlog}) : super(key: key);
@@ -31,9 +33,8 @@ class BlogFormPage extends StatelessWidget {
                     duration: const Duration(seconds: 5),
                     message: failure.map(
                       insufficientPermissions: (_) =>
-                          'Insufficient permissions ❌',
-                      unableToUpdate: (_) =>
-                          "Couldn't update the note. Was it deleted from another device?",
+                          'Insufficient permissions!',
+                      unableToUpdate: (_) => "Couldn't update the blog!",
                       unexpected: (_) =>
                           'Unexpected error occured, please contact support.',
                     ),
@@ -111,7 +112,7 @@ class BlogFormPageScaffold extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: BlocBuilder<BlogFormBloc, BlogFormState>(
-            condition: (p, c) => p.isEditing != c.isEditing,
+            buildWhen: (p, c) => p.isEditing != c.isEditing,
             builder: (context, state) =>
                 Text(state.isEditing ? 'Edit a note' : 'Create a note'),
           ),
@@ -130,26 +131,16 @@ class BlogFormPageScaffold extends StatelessWidget {
             ),
           ],
         ),
-        body: BlocBuilder<NoteFormBloc, NoteFormState>(
-          condition: (p, c) => p.showErrorMessages != c.showErrorMessages,
+        body: BlocBuilder<BlogFormBloc, BlogFormState>(
+          buildWhen: (p, c) => p.showErrorMessages != c.showErrorMessages,
           builder: (context, state) {
-            return ChangeNotifierProvider(
-              // State for the todo list.
-              // We can't operate with the validated ValueObjects and Entities directly in the UI
-              // Just like the SignInForm holds its state in TextEditingControllers as raw strings and we use ValueObjects such as EmailAddress
-              // only for showing messages and whatnot, we need to do the same here with the TodoList - but we, of course, have to manage the
-              // primitive state ourselves. After all, there isn't a pre-built widget for managing the values multiple checkboxes and text fields
-              create: (_) => FormTodos(),
-              child: Form(
-                autovalidate: state.showErrorMessages,
-                child: const CustomScrollView(
-                  slivers: <Widget>[
-                    SliverToBoxAdapter(child: BodyField()),
-                    SliverToBoxAdapter(child: ColorField()),
-                    SliverToBoxAdapter(child: TodoList()),
-                    SliverToBoxAdapter(child: AddTodoTile()),
-                  ],
-                ),
+            return Form(
+              autovalidate: state.showErrorMessages,
+              child: const CustomScrollView(
+                slivers: <Widget>[
+                  SliverToBoxAdapter(child: TitleField()),
+                  SliverToBoxAdapter(child: BodyField()),
+                ],
               ),
             );
           },

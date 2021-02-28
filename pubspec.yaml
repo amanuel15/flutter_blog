@@ -33,6 +33,7 @@ dependencies:
   dio: ^3.0.10
   equatable: ^1.2.5
   flutter_bloc: ^6.1.1
+  flutter_hooks: 0.14.0
   flutter_secure_storage: ^3.3.5
   fluttertoast: ^7.1.6
   freezed_annotation: ^0.12.0

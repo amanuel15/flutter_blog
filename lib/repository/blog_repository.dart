@@ -2,47 +2,49 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:idea_sharing/failures/blog_failure.dart';
 import 'package:idea_sharing/models/blog.dart';
+import 'package:idea_sharing/models/user.dart';
+import 'package:idea_sharing/repository/auth_repository_abstract.dart';
 import 'package:idea_sharing/repository/blog_repository_abstract.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
 
-@lazySingleton
+@LazySingleton(as: BlogRepositoryAbstract)
 class BlogRepository implements BlogRepositoryAbstract {
   final Dio dio;
   final FlutterSecureStorage flutterSecureStorage;
+  final AuthRepositoryAbstract _authRepository;
 
-  String token;
-  String id;
-  String baseUrl = 'http://localhost:3000/api/';
   String lastBlogId;
 
-  BlogRepository(this.dio, this.flutterSecureStorage);
+  BlogRepository(this.dio, this.flutterSecureStorage, this._authRepository);
 
-  Future<int> setHeader() async {
-    if (token == null) {
-      token = await flutterSecureStorage.read(key: 'token');
-      id = await flutterSecureStorage.read(key: 'id');
-      if (token == null || id == null) {
-        return -1;
-      }
-      dio.options.headers['auth-token'] = "$token";
-      dio.options.headers['id'] = "$id";
-    }
-    return 0;
+  void setHeader(User user) {
+    dio.options.headers['auth-token'] = "${user.token}";
+    dio.options.headers['id'] = "${user.userId}";
   }
 
   @override
   Future<Either<BlogFailures, Unit>> createBlog(Blog blog) async {
-    if (await setHeader() == -1)
+    final User user = await _authRepository.getSignedInUser().then(
+          (userOption) => userOption.fold(
+            () => null,
+            (user) => user,
+          ),
+        );
+
+    if (user == null) {
       return left(BlogFailures.insufficientPermissions());
+    } else {
+      setHeader(user);
+    }
 
     try {
       await dio.post(
-        'https://flutternode.herokuapp.com/api/create_post',
+        'https://flutternode.herokuapp.com/api/posts/create_post',
         data: {
           'title': blog.title,
           'body': blog.body,
-          'userEmail': blog.userEmail,
+          'userEmail': user.userEmail,
         },
       );
       return right(unit);
@@ -55,14 +57,20 @@ class BlogRepository implements BlogRepositoryAbstract {
   @override
   Future<Either<BlogFailures, Unit>> createComment(
       Comment comment, Blog blog) async {
-    if (await setHeader() == -1)
-      return left(BlogFailures.insufficientPermissions());
+    final User user = await _authRepository.getSignedInUser().then(
+          (userOption) => userOption.fold(
+            () => null,
+            (user) => user,
+          ),
+        );
+
+    if (user == null) return left(BlogFailures.insufficientPermissions());
 
     try {
       await dio.post(
         'https://flutternode.herokuapp.com/api/create_update_comment',
         data: {
-          'userEmail': comment.userEmail,
+          'userEmail': user.userEmail,
           'comment': comment.comment,
         },
       );
@@ -76,8 +84,18 @@ class BlogRepository implements BlogRepositoryAbstract {
 
   @override
   Future<Either<BlogFailures, Unit>> deleteBlog(String blogId) async {
-    if (await setHeader() == -1)
+    final User user = await _authRepository.getSignedInUser().then(
+          (userOption) => userOption.fold(
+            () => null,
+            (user) => user,
+          ),
+        );
+
+    if (user == null) {
       return left(BlogFailures.insufficientPermissions());
+    } else {
+      setHeader(user);
+    }
 
     try {
       await dio.post(
@@ -96,8 +114,18 @@ class BlogRepository implements BlogRepositoryAbstract {
 
   @override
   Future<Either<BlogFailures, List<Blog>>> watchStarted() async {
-    if (await setHeader() == -1)
+    final User user = await _authRepository.getSignedInUser().then(
+          (userOption) => userOption.fold(
+            () => null,
+            (user) => user,
+          ),
+        );
+
+    if (user == null) {
       return left(BlogFailures.insufficientPermissions());
+    } else {
+      setHeader(user);
+    }
 
     Response response;
 
@@ -123,8 +151,19 @@ class BlogRepository implements BlogRepositoryAbstract {
 
   @override
   Future<Either<BlogFailures, Unit>> likeUnlikeBlog(Blog blog) async {
-    if (await setHeader() == -1)
+    final User user = await _authRepository.getSignedInUser().then(
+          (userOption) => userOption.fold(
+            () => null,
+            (user) => user,
+          ),
+        );
+
+    if (user == null) {
       return left(BlogFailures.insufficientPermissions());
+    } else {
+      setHeader(user);
+    }
+
     try {
       await dio.put(
         'https://flutternode.herokuapp.com/api/like_unlike_post',

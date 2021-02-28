@@ -28,17 +28,20 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   final injectableModule = _$InjectableModule();
-  gh.factory<BlogFormBloc>(() => BlogFormBloc(get<BlogRepositoryAbstract>()));
   gh.lazySingleton<Dio>(() => injectableModule.dio);
   gh.lazySingleton<FlutterSecureStorage>(
       () => injectableModule.flutterSecureStorage);
   gh.lazySingleton<AuthRepositoryAbstract>(
       () => AuthRepository(get<Dio>(), get<FlutterSecureStorage>()));
-  gh.lazySingleton<BlogRepository>(
-      () => BlogRepository(get<Dio>(), get<FlutterSecureStorage>()));
+  gh.lazySingleton<BlogRepositoryAbstract>(() => BlogRepository(
+        get<Dio>(),
+        get<FlutterSecureStorage>(),
+        get<AuthRepositoryAbstract>(),
+      ));
   gh.factory<CurrentAuthBloc>(
       () => CurrentAuthBloc(get<AuthRepositoryAbstract>()));
   gh.factory<AuthBloc>(() => AuthBloc(get<AuthRepositoryAbstract>()));
+  gh.factory<BlogFormBloc>(() => BlogFormBloc(get<BlogRepositoryAbstract>()));
   return get;
 }
 

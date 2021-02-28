@@ -7,6 +7,7 @@ abstract class Blog implements _$Blog {
   const factory Blog({
     //@required String imageUrl,
     @required String userEmail,
+    @required String userId,
     @required String title,
     @required String body,
     List likes,
@@ -18,6 +19,7 @@ abstract class Blog implements _$Blog {
         userEmail: '',
         title: '',
         body: '',
+        userId: '',
       );
 
   factory Blog.fromJson(Map<String, dynamic> json) => _$BlogFromJson(json);
@@ -27,9 +29,9 @@ abstract class Blog implements _$Blog {
 abstract class Comment implements _$Comment {
   const Comment._();
   const factory Comment({
+    @required String userId,
     @required String userEmail,
     @required String comment,
-    String commentId,
   }) = _Comment;
 
   factory Comment.fromJson(Map<String, dynamic> json) =>
