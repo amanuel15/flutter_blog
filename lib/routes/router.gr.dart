@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../models/blog.dart';
 import '../presentation/blog_form/blog_form_page.dart';
 import '../presentation/blog_overview/blog_overview_page.dart';
+import '../presentation/blog_overview/my_blog_overview_page.dart';
 import '../presentation/sign_in/log_in_page.dart';
 import '../presentation/sign_in/sign_up_page.dart';
 import '../presentation/splash_page.dart';
@@ -21,12 +22,14 @@ class Routes {
   static const String logInPage = '/log-in-page';
   static const String signUpPage = '/sign-up-page';
   static const String blogOverviewPage = '/blog-overview-page';
+  static const String myBlogOverviewPage = '/my-blog-overview-page';
   static const String blogFormPage = '/blog-form-page';
   static const all = <String>{
     splashPage,
     logInPage,
     signUpPage,
     blogOverviewPage,
+    myBlogOverviewPage,
     blogFormPage,
   };
 }
@@ -39,6 +42,7 @@ class Router extends RouterBase {
     RouteDef(Routes.logInPage, page: LogInPage),
     RouteDef(Routes.signUpPage, page: SignUpPage),
     RouteDef(Routes.blogOverviewPage, page: BlogOverviewPage),
+    RouteDef(Routes.myBlogOverviewPage, page: MyBlogOverviewPage),
     RouteDef(Routes.blogFormPage, page: BlogFormPage),
   ];
   @override
@@ -68,6 +72,12 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    MyBlogOverviewPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MyBlogOverviewPage().wrappedRoute(context),
+        settings: data,
+      );
+    },
     BlogFormPage: (data) {
       final args = data.getArgs<BlogFormPageArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
@@ -94,6 +104,9 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushBlogOverviewPage() =>
       push<dynamic>(Routes.blogOverviewPage);
+
+  Future<dynamic> pushMyBlogOverviewPage() =>
+      push<dynamic>(Routes.myBlogOverviewPage);
 
   Future<dynamic> pushBlogFormPage({
     Key key,

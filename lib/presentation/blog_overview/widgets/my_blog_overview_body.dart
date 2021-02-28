@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_sharing/bloc/blog/blog_watcher/blog_watcher_bloc.dart';
 import 'package:idea_sharing/presentation/blog_overview/widgets/blog_card_widget.dart';
+import 'package:idea_sharing/presentation/blog_overview/widgets/my_blog_card_widgets.dart';
 
-class BlogOverviewBody extends StatelessWidget {
+class MyBlogOverviewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BlogWatcherBloc, BlogWatcherState>(
@@ -23,7 +24,7 @@ class BlogOverviewBody extends StatelessWidget {
                   _scrollController.position.extentAfter == 0) {
                 context
                     .read<BlogWatcherBloc>()
-                    .add(BlogWatcherEvent.watchContinued());
+                    .add(BlogWatcherEvent.watchMineContinued());
               }
               return false;
             },
@@ -35,7 +36,7 @@ class BlogOverviewBody extends StatelessWidget {
                 print(state.blogs.length);
                 return index >= state.blogs.length
                     ? _buildLoaderListItem()
-                    : BlogCard(blog: blog);
+                    : MyBlogCard(blog: blog);
               },
               itemCount: state.blogs.length,
               controller: _scrollController,

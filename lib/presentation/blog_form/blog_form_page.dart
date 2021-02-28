@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -19,8 +20,8 @@ class BlogFormPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          getIt<BlogFormBloc>()..add(BlogFormEvent.initalized(editedBlog)),
+      create: (context) => getIt<BlogFormBloc>()
+        ..add(BlogFormEvent.initalized(optionOf(editedBlog))),
       child: BlocConsumer<BlogFormBloc, BlogFormState>(
         listenWhen: (p, c) =>
             p.saveFailureOrSuccessOption != c.saveFailureOrSuccessOption,
@@ -45,8 +46,11 @@ class BlogFormPage extends HookWidget {
                   // context
                   //     .read<BlogWatcherBloc>()
                   //     .add(const BlogWatcherEvent.watchStarted());
-                  ExtendedNavigator.of(context).popUntil((route) =>
-                      route.settings.name == Routes.blogOverviewPage);
+                  state.isEditing
+                      ? ExtendedNavigator.of(context).popUntil((route) =>
+                          route.settings.name == Routes.myBlogOverviewPage)
+                      : ExtendedNavigator.of(context).popUntil((route) =>
+                          route.settings.name == Routes.blogOverviewPage);
                 },
               );
             },
@@ -118,7 +122,7 @@ class BlogFormPageScaffold extends StatelessWidget {
           title: BlocBuilder<BlogFormBloc, BlogFormState>(
             buildWhen: (p, c) => p.isEditing != c.isEditing,
             builder: (context, state) =>
-                Text(state.isEditing ? 'Edit a note' : 'Create a note'),
+                Text(state.isEditing ? 'Edit a Blog' : 'Create a Blog'),
           ),
           actions: <Widget>[
             Builder(

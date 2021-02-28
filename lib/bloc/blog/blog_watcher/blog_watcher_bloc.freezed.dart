@@ -24,6 +24,16 @@ class _$BlogWatcherEventTearOff {
   }
 
 // ignore: unused_element
+  _WatchMineStarted watchMineStarted() {
+    return const _WatchMineStarted();
+  }
+
+// ignore: unused_element
+  _WatchMineContinued watchMineContinued() {
+    return const _WatchMineContinued();
+  }
+
+// ignore: unused_element
   _BlogRecived blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs) {
     return _BlogRecived(
       failureOrBlogs,
@@ -41,6 +51,8 @@ mixin _$BlogWatcherEvent {
   TResult when<TResult extends Object>({
     @required TResult watchStarted(),
     @required TResult watchContinued(),
+    @required TResult watchMineStarted(),
+    @required TResult watchMineContinued(),
     @required
         TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
   });
@@ -48,6 +60,8 @@ mixin _$BlogWatcherEvent {
   TResult maybeWhen<TResult extends Object>({
     TResult watchStarted(),
     TResult watchContinued(),
+    TResult watchMineStarted(),
+    TResult watchMineContinued(),
     TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
     @required TResult orElse(),
   });
@@ -55,12 +69,16 @@ mixin _$BlogWatcherEvent {
   TResult map<TResult extends Object>({
     @required TResult watchStarted(_WatchStarted value),
     @required TResult watchContinued(_WatchContinued value),
+    @required TResult watchMineStarted(_WatchMineStarted value),
+    @required TResult watchMineContinued(_WatchMineContinued value),
     @required TResult blogRecived(_BlogRecived value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult watchStarted(_WatchStarted value),
     TResult watchContinued(_WatchContinued value),
+    TResult watchMineStarted(_WatchMineStarted value),
+    TResult watchMineContinued(_WatchMineContinued value),
     TResult blogRecived(_BlogRecived value),
     @required TResult orElse(),
   });
@@ -124,11 +142,15 @@ class _$_WatchStarted implements _WatchStarted {
   TResult when<TResult extends Object>({
     @required TResult watchStarted(),
     @required TResult watchContinued(),
+    @required TResult watchMineStarted(),
+    @required TResult watchMineContinued(),
     @required
         TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
   }) {
     assert(watchStarted != null);
     assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
     assert(blogRecived != null);
     return watchStarted();
   }
@@ -138,6 +160,8 @@ class _$_WatchStarted implements _WatchStarted {
   TResult maybeWhen<TResult extends Object>({
     TResult watchStarted(),
     TResult watchContinued(),
+    TResult watchMineStarted(),
+    TResult watchMineContinued(),
     TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
     @required TResult orElse(),
   }) {
@@ -153,10 +177,14 @@ class _$_WatchStarted implements _WatchStarted {
   TResult map<TResult extends Object>({
     @required TResult watchStarted(_WatchStarted value),
     @required TResult watchContinued(_WatchContinued value),
+    @required TResult watchMineStarted(_WatchMineStarted value),
+    @required TResult watchMineContinued(_WatchMineContinued value),
     @required TResult blogRecived(_BlogRecived value),
   }) {
     assert(watchStarted != null);
     assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
     assert(blogRecived != null);
     return watchStarted(this);
   }
@@ -166,6 +194,8 @@ class _$_WatchStarted implements _WatchStarted {
   TResult maybeMap<TResult extends Object>({
     TResult watchStarted(_WatchStarted value),
     TResult watchContinued(_WatchContinued value),
+    TResult watchMineStarted(_WatchMineStarted value),
+    TResult watchMineContinued(_WatchMineContinued value),
     TResult blogRecived(_BlogRecived value),
     @required TResult orElse(),
   }) {
@@ -222,11 +252,15 @@ class _$_WatchContinued implements _WatchContinued {
   TResult when<TResult extends Object>({
     @required TResult watchStarted(),
     @required TResult watchContinued(),
+    @required TResult watchMineStarted(),
+    @required TResult watchMineContinued(),
     @required
         TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
   }) {
     assert(watchStarted != null);
     assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
     assert(blogRecived != null);
     return watchContinued();
   }
@@ -236,6 +270,8 @@ class _$_WatchContinued implements _WatchContinued {
   TResult maybeWhen<TResult extends Object>({
     TResult watchStarted(),
     TResult watchContinued(),
+    TResult watchMineStarted(),
+    TResult watchMineContinued(),
     TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
     @required TResult orElse(),
   }) {
@@ -251,10 +287,14 @@ class _$_WatchContinued implements _WatchContinued {
   TResult map<TResult extends Object>({
     @required TResult watchStarted(_WatchStarted value),
     @required TResult watchContinued(_WatchContinued value),
+    @required TResult watchMineStarted(_WatchMineStarted value),
+    @required TResult watchMineContinued(_WatchMineContinued value),
     @required TResult blogRecived(_BlogRecived value),
   }) {
     assert(watchStarted != null);
     assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
     assert(blogRecived != null);
     return watchContinued(this);
   }
@@ -264,6 +304,8 @@ class _$_WatchContinued implements _WatchContinued {
   TResult maybeMap<TResult extends Object>({
     TResult watchStarted(_WatchStarted value),
     TResult watchContinued(_WatchContinued value),
+    TResult watchMineStarted(_WatchMineStarted value),
+    TResult watchMineContinued(_WatchMineContinued value),
     TResult blogRecived(_BlogRecived value),
     @required TResult orElse(),
   }) {
@@ -277,6 +319,226 @@ class _$_WatchContinued implements _WatchContinued {
 
 abstract class _WatchContinued implements BlogWatcherEvent {
   const factory _WatchContinued() = _$_WatchContinued;
+}
+
+/// @nodoc
+abstract class _$WatchMineStartedCopyWith<$Res> {
+  factory _$WatchMineStartedCopyWith(
+          _WatchMineStarted value, $Res Function(_WatchMineStarted) then) =
+      __$WatchMineStartedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$WatchMineStartedCopyWithImpl<$Res>
+    extends _$BlogWatcherEventCopyWithImpl<$Res>
+    implements _$WatchMineStartedCopyWith<$Res> {
+  __$WatchMineStartedCopyWithImpl(
+      _WatchMineStarted _value, $Res Function(_WatchMineStarted) _then)
+      : super(_value, (v) => _then(v as _WatchMineStarted));
+
+  @override
+  _WatchMineStarted get _value => super._value as _WatchMineStarted;
+}
+
+/// @nodoc
+class _$_WatchMineStarted implements _WatchMineStarted {
+  const _$_WatchMineStarted();
+
+  @override
+  String toString() {
+    return 'BlogWatcherEvent.watchMineStarted()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _WatchMineStarted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult watchStarted(),
+    @required TResult watchContinued(),
+    @required TResult watchMineStarted(),
+    @required TResult watchMineContinued(),
+    @required
+        TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
+  }) {
+    assert(watchStarted != null);
+    assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
+    assert(blogRecived != null);
+    return watchMineStarted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult watchStarted(),
+    TResult watchContinued(),
+    TResult watchMineStarted(),
+    TResult watchMineContinued(),
+    TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (watchMineStarted != null) {
+      return watchMineStarted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult watchStarted(_WatchStarted value),
+    @required TResult watchContinued(_WatchContinued value),
+    @required TResult watchMineStarted(_WatchMineStarted value),
+    @required TResult watchMineContinued(_WatchMineContinued value),
+    @required TResult blogRecived(_BlogRecived value),
+  }) {
+    assert(watchStarted != null);
+    assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
+    assert(blogRecived != null);
+    return watchMineStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult watchStarted(_WatchStarted value),
+    TResult watchContinued(_WatchContinued value),
+    TResult watchMineStarted(_WatchMineStarted value),
+    TResult watchMineContinued(_WatchMineContinued value),
+    TResult blogRecived(_BlogRecived value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (watchMineStarted != null) {
+      return watchMineStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchMineStarted implements BlogWatcherEvent {
+  const factory _WatchMineStarted() = _$_WatchMineStarted;
+}
+
+/// @nodoc
+abstract class _$WatchMineContinuedCopyWith<$Res> {
+  factory _$WatchMineContinuedCopyWith(
+          _WatchMineContinued value, $Res Function(_WatchMineContinued) then) =
+      __$WatchMineContinuedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$WatchMineContinuedCopyWithImpl<$Res>
+    extends _$BlogWatcherEventCopyWithImpl<$Res>
+    implements _$WatchMineContinuedCopyWith<$Res> {
+  __$WatchMineContinuedCopyWithImpl(
+      _WatchMineContinued _value, $Res Function(_WatchMineContinued) _then)
+      : super(_value, (v) => _then(v as _WatchMineContinued));
+
+  @override
+  _WatchMineContinued get _value => super._value as _WatchMineContinued;
+}
+
+/// @nodoc
+class _$_WatchMineContinued implements _WatchMineContinued {
+  const _$_WatchMineContinued();
+
+  @override
+  String toString() {
+    return 'BlogWatcherEvent.watchMineContinued()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _WatchMineContinued);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult watchStarted(),
+    @required TResult watchContinued(),
+    @required TResult watchMineStarted(),
+    @required TResult watchMineContinued(),
+    @required
+        TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
+  }) {
+    assert(watchStarted != null);
+    assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
+    assert(blogRecived != null);
+    return watchMineContinued();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult watchStarted(),
+    TResult watchContinued(),
+    TResult watchMineStarted(),
+    TResult watchMineContinued(),
+    TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (watchMineContinued != null) {
+      return watchMineContinued();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult watchStarted(_WatchStarted value),
+    @required TResult watchContinued(_WatchContinued value),
+    @required TResult watchMineStarted(_WatchMineStarted value),
+    @required TResult watchMineContinued(_WatchMineContinued value),
+    @required TResult blogRecived(_BlogRecived value),
+  }) {
+    assert(watchStarted != null);
+    assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
+    assert(blogRecived != null);
+    return watchMineContinued(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult watchStarted(_WatchStarted value),
+    TResult watchContinued(_WatchContinued value),
+    TResult watchMineStarted(_WatchMineStarted value),
+    TResult watchMineContinued(_WatchMineContinued value),
+    TResult blogRecived(_BlogRecived value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (watchMineContinued != null) {
+      return watchMineContinued(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchMineContinued implements BlogWatcherEvent {
+  const factory _WatchMineContinued() = _$_WatchMineContinued;
 }
 
 /// @nodoc
@@ -346,11 +608,15 @@ class _$_BlogRecived implements _BlogRecived {
   TResult when<TResult extends Object>({
     @required TResult watchStarted(),
     @required TResult watchContinued(),
+    @required TResult watchMineStarted(),
+    @required TResult watchMineContinued(),
     @required
         TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
   }) {
     assert(watchStarted != null);
     assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
     assert(blogRecived != null);
     return blogRecived(failureOrBlogs);
   }
@@ -360,6 +626,8 @@ class _$_BlogRecived implements _BlogRecived {
   TResult maybeWhen<TResult extends Object>({
     TResult watchStarted(),
     TResult watchContinued(),
+    TResult watchMineStarted(),
+    TResult watchMineContinued(),
     TResult blogRecived(Either<BlogFailures, List<Blog>> failureOrBlogs),
     @required TResult orElse(),
   }) {
@@ -375,10 +643,14 @@ class _$_BlogRecived implements _BlogRecived {
   TResult map<TResult extends Object>({
     @required TResult watchStarted(_WatchStarted value),
     @required TResult watchContinued(_WatchContinued value),
+    @required TResult watchMineStarted(_WatchMineStarted value),
+    @required TResult watchMineContinued(_WatchMineContinued value),
     @required TResult blogRecived(_BlogRecived value),
   }) {
     assert(watchStarted != null);
     assert(watchContinued != null);
+    assert(watchMineStarted != null);
+    assert(watchMineContinued != null);
     assert(blogRecived != null);
     return blogRecived(this);
   }
@@ -388,6 +660,8 @@ class _$_BlogRecived implements _BlogRecived {
   TResult maybeMap<TResult extends Object>({
     TResult watchStarted(_WatchStarted value),
     TResult watchContinued(_WatchContinued value),
+    TResult watchMineStarted(_WatchMineStarted value),
+    TResult watchMineContinued(_WatchMineContinued value),
     TResult blogRecived(_BlogRecived value),
     @required TResult orElse(),
   }) {

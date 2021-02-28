@@ -112,6 +112,7 @@ class AuthRepository implements AuthRepositoryAbstract {
     String token = await flutterSecureStorage.read(key: 'token');
     String id = await flutterSecureStorage.read(key: 'id');
     String email = await flutterSecureStorage.read(key: 'email');
+    print('\ntoken: ' + token + '\nid: ' + id + '\nemail' + email);
     if (token == null || id == null) {
       _blogRepository.setUser(null);
       return optionOf(null);

@@ -14,7 +14,7 @@ class _$BlogFormEventTearOff {
   const _$BlogFormEventTearOff();
 
 // ignore: unused_element
-  _Initalized initalized(Blog initialBlog) {
+  _Initalized initalized(Option<Blog> initialBlog) {
     return _Initalized(
       initialBlog,
     );
@@ -48,14 +48,14 @@ const $BlogFormEvent = _$BlogFormEventTearOff();
 mixin _$BlogFormEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initalized(Blog initialBlog),
+    @required TResult initalized(Option<Blog> initialBlog),
     @required TResult titleChanged(String title),
     @required TResult bodyChanged(String body),
     @required TResult saved(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initalized(Blog initialBlog),
+    TResult initalized(Option<Blog> initialBlog),
     TResult titleChanged(String title),
     TResult bodyChanged(String body),
     TResult saved(),
@@ -100,9 +100,7 @@ abstract class _$InitalizedCopyWith<$Res> {
   factory _$InitalizedCopyWith(
           _Initalized value, $Res Function(_Initalized) then) =
       __$InitalizedCopyWithImpl<$Res>;
-  $Res call({Blog initialBlog});
-
-  $BlogCopyWith<$Res> get initialBlog;
+  $Res call({Option<Blog> initialBlog});
 }
 
 /// @nodoc
@@ -120,18 +118,8 @@ class __$InitalizedCopyWithImpl<$Res> extends _$BlogFormEventCopyWithImpl<$Res>
     Object initialBlog = freezed,
   }) {
     return _then(_Initalized(
-      initialBlog == freezed ? _value.initialBlog : initialBlog as Blog,
+      initialBlog == freezed ? _value.initialBlog : initialBlog as Option<Blog>,
     ));
-  }
-
-  @override
-  $BlogCopyWith<$Res> get initialBlog {
-    if (_value.initialBlog == null) {
-      return null;
-    }
-    return $BlogCopyWith<$Res>(_value.initialBlog, (value) {
-      return _then(_value.copyWith(initialBlog: value));
-    });
   }
 }
 
@@ -140,7 +128,7 @@ class _$_Initalized implements _Initalized {
   const _$_Initalized(this.initialBlog) : assert(initialBlog != null);
 
   @override
-  final Blog initialBlog;
+  final Option<Blog> initialBlog;
 
   @override
   String toString() {
@@ -168,7 +156,7 @@ class _$_Initalized implements _Initalized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initalized(Blog initialBlog),
+    @required TResult initalized(Option<Blog> initialBlog),
     @required TResult titleChanged(String title),
     @required TResult bodyChanged(String body),
     @required TResult saved(),
@@ -183,7 +171,7 @@ class _$_Initalized implements _Initalized {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initalized(Blog initialBlog),
+    TResult initalized(Option<Blog> initialBlog),
     TResult titleChanged(String title),
     TResult bodyChanged(String body),
     TResult saved(),
@@ -229,9 +217,9 @@ class _$_Initalized implements _Initalized {
 }
 
 abstract class _Initalized implements BlogFormEvent {
-  const factory _Initalized(Blog initialBlog) = _$_Initalized;
+  const factory _Initalized(Option<Blog> initialBlog) = _$_Initalized;
 
-  Blog get initialBlog;
+  Option<Blog> get initialBlog;
   @JsonKey(ignore: true)
   _$InitalizedCopyWith<_Initalized> get copyWith;
 }
@@ -297,7 +285,7 @@ class _$_TitleChanged implements _TitleChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initalized(Blog initialBlog),
+    @required TResult initalized(Option<Blog> initialBlog),
     @required TResult titleChanged(String title),
     @required TResult bodyChanged(String body),
     @required TResult saved(),
@@ -312,7 +300,7 @@ class _$_TitleChanged implements _TitleChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initalized(Blog initialBlog),
+    TResult initalized(Option<Blog> initialBlog),
     TResult titleChanged(String title),
     TResult bodyChanged(String body),
     TResult saved(),
@@ -425,7 +413,7 @@ class _$_BodyChanged implements _BodyChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initalized(Blog initialBlog),
+    @required TResult initalized(Option<Blog> initialBlog),
     @required TResult titleChanged(String title),
     @required TResult bodyChanged(String body),
     @required TResult saved(),
@@ -440,7 +428,7 @@ class _$_BodyChanged implements _BodyChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initalized(Blog initialBlog),
+    TResult initalized(Option<Blog> initialBlog),
     TResult titleChanged(String title),
     TResult bodyChanged(String body),
     TResult saved(),
@@ -529,7 +517,7 @@ class _$_Saved implements _Saved {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initalized(Blog initialBlog),
+    @required TResult initalized(Option<Blog> initialBlog),
     @required TResult titleChanged(String title),
     @required TResult bodyChanged(String body),
     @required TResult saved(),
@@ -544,7 +532,7 @@ class _$_Saved implements _Saved {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initalized(Blog initialBlog),
+    TResult initalized(Option<Blog> initialBlog),
     TResult titleChanged(String title),
     TResult bodyChanged(String body),
     TResult saved(),

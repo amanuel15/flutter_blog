@@ -22,7 +22,7 @@ class BlogCard extends StatelessWidget {
           authenticated: (authenticated) {
             userId = authenticated.user.userId;
           },
-          orElse: null,
+          orElse: () {},
         );
       },
       child: Card(
@@ -49,7 +49,7 @@ class BlogCard extends StatelessWidget {
               ),
               subtitle: blog.body.length < 60
                   ? Text(blog.body)
-                  : Text(blog.body.substring(1, 70) + '...'),
+                  : Text(blog.body.substring(0, 70) + '...'),
             ),
           ),
         ),

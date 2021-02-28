@@ -25,12 +25,26 @@ class BlogWatcherBloc extends Bloc<BlogWatcherEvent, BlogWatcherState> {
   ) async* {
     yield* event.map(
       watchStarted: (e) async* {
+        oldBlogsList = [];
         yield const BlogWatcherState.loadInProgress();
         _blogRepository
             .watchStarted()
             .then((blogs) => add(BlogWatcherEvent.blogRecived(blogs)));
       },
       watchContinued: (e) async* {
+        yield const BlogWatcherState.loadInProgress();
+        _blogRepository
+            .watchMineStarted()
+            .then((blogs) => add(BlogWatcherEvent.blogRecived(blogs)));
+      },
+      watchMineStarted: (e) async* {
+        oldBlogsList = [];
+        yield const BlogWatcherState.loadInProgress();
+        _blogRepository
+            .watchMineStarted()
+            .then((blogs) => add(BlogWatcherEvent.blogRecived(blogs)));
+      },
+      watchMineContinued: (e) async* {
         yield const BlogWatcherState.loadInProgress();
         _blogRepository
             .watchStarted()

@@ -53,6 +53,32 @@ class BlogRepository implements BlogRepositoryAbstract {
   }
 
   @override
+  Future<Either<BlogFailures, Unit>> updateBlog(Blog blog) async {
+    if (user != null)
+      try {
+        print('\nblogId: ' + blog.blogId);
+        await dio.post(
+          'https://flutternode.herokuapp.com/api/posts/update_post',
+          queryParameters: {
+            'blogId': blog.blogId,
+          },
+          data: {
+            'title': blog.title,
+            'body': blog.body,
+            'userEmail': user.userEmail,
+          },
+        );
+        return right(unit);
+      } on DioError catch (e) {
+        if (e.response.statusCode == 400)
+          return left(BlogFailures.unexpected());
+        return left(BlogFailures.unexpected());
+      }
+    else
+      return left(BlogFailures.insufficientPermissions());
+  }
+
+  @override
   Future<Either<BlogFailures, Unit>> createComment(
       Comment comment, Blog blog) async {
     if (user != null)
@@ -111,7 +137,6 @@ class BlogRepository implements BlogRepositoryAbstract {
         }
         var posts = response.data['posts'];
         //print('\n***data***:' + response.data['posts'][0]);
-        var b = response.data['posts'].map((doc) => Blog.fromJson(doc));
         List<Blog> blogs = new List(posts.length);
         for (int i = 0; i < posts.length; i++) {
           blogs[i] = Blog(
@@ -119,6 +144,54 @@ class BlogRepository implements BlogRepositoryAbstract {
             userId: posts[i]['userId'],
             title: posts[i]['title'],
             body: posts[i]['body'],
+            blogId: posts[i]['_id'],
+          );
+        }
+        // List<Blog> blogs = response.data['posts'].forEach(
+        //   (element) => Blog(
+        //     userEmail: element['userEmail'],
+        //     userId: element['userId'],
+        //     title: element['title'],
+        //     body: element['body'],
+        //   ),
+        // );
+
+        return right<BlogFailures, List<Blog>>(blogs);
+        //return right(PostsModel.fromJson(response.data as Map<String, dynamic>));
+      } on DioError catch (e) {
+        if (e.response.statusCode == 400)
+          return left(BlogFailures.insufficientPermissions());
+        return left(BlogFailures.unexpected());
+      }
+    else
+      return left(BlogFailures.insufficientPermissions());
+  }
+
+  @override
+  Future<Either<BlogFailures, List<Blog>>> watchMineStarted() async {
+    Response response;
+
+    if (user != null)
+      try {
+        if (lastBlogId == null) {
+          response = await dio
+              .get('https://flutternode.herokuapp.com/api/posts/get_my_posts');
+        } else {
+          response = await dio.get(
+            'https://flutternode.herokuapp.com/api/posts/get_my_posts',
+            queryParameters: {'lastId': lastBlogId},
+          );
+        }
+        var posts = response.data['posts'];
+        //print('\n***data***:' + response.data['posts'][0]);
+        List<Blog> blogs = new List(posts.length);
+        for (int i = 0; i < posts.length; i++) {
+          blogs[i] = Blog(
+            userEmail: posts[i]['userEmail'],
+            userId: posts[i]['userId'],
+            title: posts[i]['title'],
+            body: posts[i]['body'],
+            blogId: posts[i]['_id'],
           );
         }
         // List<Blog> blogs = response.data['posts'].forEach(
@@ -155,12 +228,6 @@ class BlogRepository implements BlogRepositoryAbstract {
       }
     else
       return left(BlogFailures.insufficientPermissions());
-  }
-
-  @override
-  Future<Either<BlogFailures, Unit>> updateBlog(Blog blog) {
-    // TODO: implement updateBlog
-    throw UnimplementedError();
   }
 
   // @override

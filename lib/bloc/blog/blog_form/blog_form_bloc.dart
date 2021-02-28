@@ -24,9 +24,12 @@ class BlogFormBloc extends Bloc<BlogFormEvent, BlogFormState> {
   ) async* {
     yield* event.map(
       initalized: (e) async* {
-        yield state.copyWith(
-          blog: e.initialBlog,
-          isEditing: true,
+        yield e.initialBlog.fold(
+          () => state,
+          (initialBlog) => state.copyWith(
+            blog: initialBlog,
+            isEditing: true,
+          ),
         );
       },
       titleChanged: (e) async* {
@@ -50,7 +53,7 @@ class BlogFormBloc extends Bloc<BlogFormEvent, BlogFormState> {
         );
 
         failureOrSuccess = state.isEditing
-            ? await _blogRepository.createBlog(state.blog)
+            ? await _blogRepository.updateBlog(state.blog)
             : await _blogRepository.createBlog(state.blog);
 
         yield state.copyWith(

@@ -7,16 +7,17 @@ import 'package:idea_sharing/bloc/blog/blog_watcher/blog_watcher_bloc.dart';
 import 'package:idea_sharing/injectable.dart';
 import 'package:idea_sharing/models/blog.dart';
 import 'package:idea_sharing/presentation/blog_overview/widgets/blog_overview_body.dart';
+import 'package:idea_sharing/presentation/blog_overview/widgets/my_blog_overview_body.dart';
 import 'package:idea_sharing/routes/router.gr.dart';
 
-class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
+class MyBlogOverviewPage extends HookWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlogWatcherBloc>(create: (context) {
           return getIt<BlogWatcherBloc>()
-            ..add(const BlogWatcherEvent.watchStarted());
+            ..add(const BlogWatcherEvent.watchMineStarted());
         }),
       ],
       child: this,
@@ -39,7 +40,7 @@ class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Blogs'),
+          title: Text('My Blogs'),
           actions: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -54,7 +55,7 @@ class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
             IconButton(
               icon: Icon(Icons.my_library_books),
               onPressed: () => ExtendedNavigator.of(context)
-                  .popAndPush(Routes.myBlogOverviewPage),
+                  .popAndPush(Routes.blogOverviewPage),
             ),
           ],
         ),
@@ -64,7 +65,7 @@ class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 120.0),
               child: Text(
-                'Blogs Feed',
+                'My posts',
                 style: TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,
@@ -74,17 +75,17 @@ class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
             const SizedBox(
               height: 20.0,
             ),
-            BlogOverviewBody(),
+            MyBlogOverviewBody(),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            ExtendedNavigator.of(context).push(Routes.blogFormPage,
-                arguments: BlogFormPageArguments(editedBlog: null));
-          },
-          tooltip: 'Add Blog',
-          child: Icon(Icons.add),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     ExtendedNavigator.of(context).push(Routes.blogFormPage,
+        //         arguments: BlogFormPageArguments(editedBlog: Blog.empty()));
+        //   },
+        //   tooltip: 'Add Blog',
+        //   child: Icon(Icons.add),
+        // ),
       ),
     );
   }
