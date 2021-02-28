@@ -6,6 +6,8 @@ import 'package:idea_sharing/failures/auth_failures.dart';
 import 'package:idea_sharing/models/user.dart';
 import 'package:idea_sharing/models/value_objects.dart';
 import 'package:idea_sharing/repository/auth_repository_abstract.dart';
+import 'package:idea_sharing/repository/blog_repository.dart';
+import 'package:idea_sharing/repository/blog_repository_abstract.dart';
 import 'package:path/path.dart' as path;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -16,10 +18,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class AuthRepository implements AuthRepositoryAbstract {
   final Dio dio;
   final FlutterSecureStorage flutterSecureStorage;
+  final BlogRepositoryAbstract _blogRepository;
 
   AuthRepository(
     this.dio,
     this.flutterSecureStorage,
+    this._blogRepository,
   );
 
   @override
@@ -109,9 +113,11 @@ class AuthRepository implements AuthRepositoryAbstract {
     String id = await flutterSecureStorage.read(key: 'id');
     String email = await flutterSecureStorage.read(key: 'email');
     if (token == null || id == null) {
+      _blogRepository.setUser(null);
       return optionOf(null);
     }
     final user = User(userId: id, token: token, userEmail: email);
+    _blogRepository.setUser(user);
     return optionOf(user);
   }
 }

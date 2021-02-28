@@ -3,11 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:idea_sharing/bloc/auth/bloc/current_auth_bloc.dart';
+import 'package:idea_sharing/bloc/blog/blog_watcher/blog_watcher_bloc.dart';
+import 'package:idea_sharing/injectable.dart';
 import 'package:idea_sharing/models/blog.dart';
 import 'package:idea_sharing/presentation/blog_overview/widgets/blog_overview_body.dart';
 import 'package:idea_sharing/routes/router.gr.dart';
 
-class BlogOverviewPage extends HookWidget {
+class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BlogWatcherBloc>(create: (context) {
+          return getIt<BlogWatcherBloc>()
+            ..add(const BlogWatcherEvent.watchStarted());
+        }),
+      ],
+      child: this,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(

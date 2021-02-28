@@ -12,167 +12,149 @@ import 'package:dio/dio.dart';
 class BlogRepository implements BlogRepositoryAbstract {
   final Dio dio;
   final FlutterSecureStorage flutterSecureStorage;
-  final AuthRepositoryAbstract _authRepository;
+  //final AuthRepositoryAbstract _authRepository;
+  User user;
 
   String lastBlogId;
 
-  BlogRepository(this.dio, this.flutterSecureStorage, this._authRepository);
+  BlogRepository(this.dio, this.flutterSecureStorage);
 
-  void setHeader(User user) {
+  @override
+  void setUser(User sentUser) {
+    user = sentUser;
+    if (user != null) setHeader();
+  }
+
+  void setHeader() {
     dio.options.headers['auth-token'] = "${user.token}";
     dio.options.headers['id'] = "${user.userId}";
   }
 
   @override
   Future<Either<BlogFailures, Unit>> createBlog(Blog blog) async {
-    final User user = await _authRepository.getSignedInUser().then(
-          (userOption) => userOption.fold(
-            () => null,
-            (user) => user,
-          ),
+    if (user != null)
+      try {
+        await dio.post(
+          'https://flutternode.herokuapp.com/api/posts/create_post',
+          data: {
+            'title': blog.title,
+            'body': blog.body,
+            'userEmail': user.userEmail,
+          },
         );
-
-    if (user == null) {
+        return right(unit);
+      } on DioError catch (e) {
+        if (e.response.statusCode == 400)
+          return left(BlogFailures.unexpected());
+        return left(BlogFailures.unexpected());
+      }
+    else
       return left(BlogFailures.insufficientPermissions());
-    } else {
-      setHeader(user);
-    }
-
-    try {
-      await dio.post(
-        'https://flutternode.herokuapp.com/api/posts/create_post',
-        data: {
-          'title': blog.title,
-          'body': blog.body,
-          'userEmail': user.userEmail,
-        },
-      );
-      return right(unit);
-    } on DioError catch (e) {
-      if (e.response.statusCode == 400) return left(BlogFailures.unexpected());
-      return left(BlogFailures.unexpected());
-    }
   }
 
   @override
   Future<Either<BlogFailures, Unit>> createComment(
       Comment comment, Blog blog) async {
-    final User user = await _authRepository.getSignedInUser().then(
-          (userOption) => userOption.fold(
-            () => null,
-            (user) => user,
-          ),
+    if (user != null)
+      try {
+        await dio.post(
+          'https://flutternode.herokuapp.com/api/posts/create_update_comment',
+          data: {
+            'userEmail': user.userEmail,
+            'comment': comment.comment,
+          },
         );
-
-    if (user == null) return left(BlogFailures.insufficientPermissions());
-
-    try {
-      await dio.post(
-        'https://flutternode.herokuapp.com/api/create_update_comment',
-        data: {
-          'userEmail': user.userEmail,
-          'comment': comment.comment,
-        },
-      );
-      return right(unit);
-    } on DioError catch (e) {
-      if (e.response.statusCode == 400)
-        return left(BlogFailures.unableToUpdate());
-      return left(BlogFailures.unexpected());
-    }
+        return right(unit);
+      } on DioError catch (e) {
+        if (e.response.statusCode == 400)
+          return left(BlogFailures.unableToUpdate());
+        return left(BlogFailures.unexpected());
+      }
+    else
+      return left(BlogFailures.insufficientPermissions());
   }
 
   @override
   Future<Either<BlogFailures, Unit>> deleteBlog(String blogId) async {
-    final User user = await _authRepository.getSignedInUser().then(
-          (userOption) => userOption.fold(
-            () => null,
-            (user) => user,
-          ),
+    if (user != null)
+      try {
+        await dio.post(
+          'https://flutternode.herokuapp.com/api/posts/delete_post',
+          data: {
+            'blogId': blogId,
+          },
         );
-
-    if (user == null) {
+        return right(unit);
+      } on DioError catch (e) {
+        if (e.response.statusCode == 400)
+          return left(BlogFailures.unableToUpdate());
+        return left(BlogFailures.unexpected());
+      }
+    else
       return left(BlogFailures.insufficientPermissions());
-    } else {
-      setHeader(user);
-    }
-
-    try {
-      await dio.post(
-        'https://flutternode.herokuapp.com/api/delete_post',
-        data: {
-          'blogId': blogId,
-        },
-      );
-      return right(unit);
-    } on DioError catch (e) {
-      if (e.response.statusCode == 400)
-        return left(BlogFailures.unableToUpdate());
-      return left(BlogFailures.unexpected());
-    }
   }
 
   @override
   Future<Either<BlogFailures, List<Blog>>> watchStarted() async {
-    final User user = await _authRepository.getSignedInUser().then(
-          (userOption) => userOption.fold(
-            () => null,
-            (user) => user,
-          ),
-        );
-
-    if (user == null) {
-      return left(BlogFailures.insufficientPermissions());
-    } else {
-      setHeader(user);
-    }
-
     Response response;
 
-    try {
-      if (lastBlogId == null) {
-        response =
-            await dio.get('https://flutternode.herokuapp.com/api/get_feed');
-      } else {
-        response = await dio.get(
-          'https://flutternode.herokuapp.com/api/get_feed',
-          queryParameters: {'lastId': lastBlogId},
-        );
+    if (user != null)
+      try {
+        if (lastBlogId == null) {
+          response = await dio
+              .get('https://flutternode.herokuapp.com/api/posts/get_feed');
+        } else {
+          response = await dio.get(
+            'https://flutternode.herokuapp.com/api/posts/get_feed',
+            queryParameters: {'lastId': lastBlogId},
+          );
+        }
+        var posts = response.data['posts'];
+        //print('\n***data***:' + response.data['posts'][0]);
+        var b = response.data['posts'].map((doc) => Blog.fromJson(doc));
+        List<Blog> blogs = new List(posts.length);
+        for (int i = 0; i < posts.length; i++) {
+          blogs[i] = Blog(
+            userEmail: posts[i]['userEmail'],
+            userId: posts[i]['userId'],
+            title: posts[i]['title'],
+            body: posts[i]['body'],
+          );
+        }
+        // List<Blog> blogs = response.data['posts'].forEach(
+        //   (element) => Blog(
+        //     userEmail: element['userEmail'],
+        //     userId: element['userId'],
+        //     title: element['title'],
+        //     body: element['body'],
+        //   ),
+        // );
+
+        return right<BlogFailures, List<Blog>>(blogs);
+        //return right(PostsModel.fromJson(response.data as Map<String, dynamic>));
+      } on DioError catch (e) {
+        if (e.response.statusCode == 400)
+          return left(BlogFailures.insufficientPermissions());
+        return left(BlogFailures.unexpected());
       }
-      return right<BlogFailures, List<Blog>>(
-          response.data.map((doc) => Blog.fromJson(doc)).toList());
-      //return right(PostsModel.fromJson(response.data as Map<String, dynamic>));
-    } on DioError catch (e) {
-      if (e.response.statusCode == 400)
-        return left(BlogFailures.insufficientPermissions());
-      return left(BlogFailures.unexpected());
-    }
+    else
+      return left(BlogFailures.insufficientPermissions());
   }
 
   @override
   Future<Either<BlogFailures, Unit>> likeUnlikeBlog(Blog blog) async {
-    final User user = await _authRepository.getSignedInUser().then(
-          (userOption) => userOption.fold(
-            () => null,
-            (user) => user,
-          ),
+    if (user != null)
+      try {
+        await dio.put(
+          'https://flutternode.herokuapp.com/api/posts/like_unlike_post',
+          data: {'postId': blog.blogId},
         );
-
-    if (user == null) {
+        return right(unit);
+      } on DioError catch (e) {
+        return left(BlogFailures.unexpected());
+      }
+    else
       return left(BlogFailures.insufficientPermissions());
-    } else {
-      setHeader(user);
-    }
-
-    try {
-      await dio.put(
-        'https://flutternode.herokuapp.com/api/like_unlike_post',
-        data: {'postId': blog.blogId},
-      );
-      return right(unit);
-    } on DioError catch (e) {
-      return left(BlogFailures.unexpected());
-    }
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:idea_sharing/bloc/blog/blog_form/blog_form_bloc.dart';
+import 'package:idea_sharing/bloc/blog/blog_watcher/blog_watcher_bloc.dart';
 import 'package:idea_sharing/injectable.dart';
 import 'package:idea_sharing/models/blog.dart';
 import 'package:idea_sharing/presentation/blog_form/widgets/body_field_widget.dart';
@@ -41,6 +42,9 @@ class BlogFormPage extends HookWidget {
                   ).show(context);
                 },
                 (_) {
+                  // context
+                  //     .read<BlogWatcherBloc>()
+                  //     .add(const BlogWatcherEvent.watchStarted());
                   ExtendedNavigator.of(context).popUntil((route) =>
                       route.settings.name == Routes.blogOverviewPage);
                 },

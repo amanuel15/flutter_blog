@@ -15,6 +15,7 @@ import 'repository/auth_repository_abstract.dart';
 import 'bloc/blog/blog_form/blog_form_bloc.dart';
 import 'repository/blog_repository.dart';
 import 'repository/blog_repository_abstract.dart';
+import 'bloc/blog/blog_watcher/blog_watcher_bloc.dart';
 import 'bloc/auth/bloc/current_auth_bloc.dart';
 import 'injectable_modules.dart';
 
@@ -31,17 +32,19 @@ GetIt $initGetIt(
   gh.lazySingleton<Dio>(() => injectableModule.dio);
   gh.lazySingleton<FlutterSecureStorage>(
       () => injectableModule.flutterSecureStorage);
-  gh.lazySingleton<AuthRepositoryAbstract>(
-      () => AuthRepository(get<Dio>(), get<FlutterSecureStorage>()));
-  gh.lazySingleton<BlogRepositoryAbstract>(() => BlogRepository(
+  gh.lazySingleton<BlogRepositoryAbstract>(
+      () => BlogRepository(get<Dio>(), get<FlutterSecureStorage>()));
+  gh.factory<BlogWatcherBloc>(
+      () => BlogWatcherBloc(get<BlogRepositoryAbstract>()));
+  gh.lazySingleton<AuthRepositoryAbstract>(() => AuthRepository(
         get<Dio>(),
         get<FlutterSecureStorage>(),
-        get<AuthRepositoryAbstract>(),
+        get<BlogRepositoryAbstract>(),
       ));
+  gh.factory<BlogFormBloc>(() => BlogFormBloc(get<BlogRepositoryAbstract>()));
   gh.factory<CurrentAuthBloc>(
       () => CurrentAuthBloc(get<AuthRepositoryAbstract>()));
   gh.factory<AuthBloc>(() => AuthBloc(get<AuthRepositoryAbstract>()));
-  gh.factory<BlogFormBloc>(() => BlogFormBloc(get<BlogRepositoryAbstract>()));
   return get;
 }
 

@@ -64,7 +64,7 @@ class Router extends RouterBase {
     },
     BlogOverviewPage: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => BlogOverviewPage(),
+        builder: (context) => BlogOverviewPage().wrappedRoute(context),
         settings: data,
       );
     },
