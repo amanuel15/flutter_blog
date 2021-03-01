@@ -46,6 +46,14 @@ class BlogFormPage extends HookWidget {
                   // context
                   //     .read<BlogWatcherBloc>()
                   //     .add(const BlogWatcherEvent.watchStarted());
+                  // if (state.isEditing)
+                  //   context
+                  //       .read<BlogWatcherBloc>()
+                  //       .add(BlogWatcherEvent.watchMineStarted());
+                  // else
+                  //   context
+                  //       .read<BlogWatcherBloc>()
+                  //       .add(BlogWatcherEvent.watchStarted());
                   state.isEditing
                       ? ExtendedNavigator.of(context).popUntil((route) =>
                           route.settings.name == Routes.myBlogOverviewPage)

@@ -71,8 +71,9 @@ class MyBlogCard extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.delete),
                   onPressed: () {
-                    final noteActorBloc = context.read<BlogActorBloc>();
-                    noteActorBloc.add(BlogActorEvent.deleted(blog));
+                    context
+                        .read<BlogActorBloc>()
+                        .add(BlogActorEvent.deleted(blog));
                   },
                 ),
               ],

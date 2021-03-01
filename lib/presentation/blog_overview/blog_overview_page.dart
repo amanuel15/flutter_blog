@@ -101,25 +101,7 @@ class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
             );
           },
         ),
-        body: ListView(
-          padding: EdgeInsets.symmetric(vertical: 20.0),
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 120.0),
-              child: Text(
-                'Blogs Feed',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            BlogOverviewBody(),
-          ],
-        ),
+        body: BlogOverviewBody(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             ExtendedNavigator.of(context).push(Routes.blogFormPage,

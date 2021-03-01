@@ -6,8 +6,8 @@ import 'package:idea_sharing/models/dummy_user.dart';
 import 'package:idea_sharing/models/user.dart';
 
 abstract class BlogRepositoryAbstract {
-  Future<Either<BlogFailures, List<Blog>>> watchStarted();
-  Future<Either<BlogFailures, List<Blog>>> watchMineStarted();
+  Future<Either<BlogFailures, List<Blog>>> watchStarted(bool refresh);
+  Future<Either<BlogFailures, List<Blog>>> watchMineStarted(bool refresh);
   Future<Either<BlogFailures, Unit>> createBlog(Blog blog);
   Future<Either<BlogFailures, Unit>> updateBlog(Blog blog);
   Future<Either<BlogFailures, Unit>> deleteBlog(String blogId);

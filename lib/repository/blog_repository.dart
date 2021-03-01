@@ -16,6 +16,7 @@ class BlogRepository implements BlogRepositoryAbstract {
   User user;
 
   String lastBlogId;
+  bool listDone = false;
 
   BlogRepository(this.dio, this.flutterSecureStorage);
 
@@ -122,10 +123,16 @@ class BlogRepository implements BlogRepositoryAbstract {
   }
 
   @override
-  Future<Either<BlogFailures, List<Blog>>> watchStarted() async {
-    Response response;
+  Future<Either<BlogFailures, List<Blog>>> watchStarted(bool refresh) async {
+    if (refresh) {
+      lastBlogId = null;
+      listDone = false;
+    }
 
-    if (user != null)
+    Response response;
+    print(lastBlogId);
+
+    if (user != null && !listDone)
       try {
         if (lastBlogId == null) {
           response = await dio
@@ -148,6 +155,10 @@ class BlogRepository implements BlogRepositoryAbstract {
             blogId: posts[i]['_id'],
           );
         }
+        if (blogs.isEmpty)
+          listDone = true;
+        else
+          lastBlogId = blogs.last.blogId;
         // List<Blog> blogs = response.data['posts'].forEach(
         //   (element) => Blog(
         //     userEmail: element['userEmail'],
@@ -169,10 +180,16 @@ class BlogRepository implements BlogRepositoryAbstract {
   }
 
   @override
-  Future<Either<BlogFailures, List<Blog>>> watchMineStarted() async {
+  Future<Either<BlogFailures, List<Blog>>> watchMineStarted(
+      bool refresh) async {
     Response response;
 
-    if (user != null)
+    if (refresh) {
+      lastBlogId = null;
+      listDone = false;
+    }
+
+    if (user != null && !listDone)
       try {
         if (lastBlogId == null) {
           response = await dio
@@ -195,6 +212,10 @@ class BlogRepository implements BlogRepositoryAbstract {
             blogId: posts[i]['_id'],
           );
         }
+        if (blogs.isEmpty)
+          listDone = true;
+        else
+          lastBlogId = blogs.last.blogId;
         // List<Blog> blogs = response.data['posts'].forEach(
         //   (element) => Blog(
         //     userEmail: element['userEmail'],

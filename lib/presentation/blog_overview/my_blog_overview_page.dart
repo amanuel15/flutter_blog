@@ -57,6 +57,11 @@ class MyBlogOverviewPage extends HookWidget implements AutoRouteWrapper {
                           'Unexpected error occured while deleting, please contact support.'),
                 ).show(context);
               },
+              deleteSuccess: (state) {
+                context
+                    .read<BlogWatcherBloc>()
+                    .add(BlogWatcherEvent.watchMineStarted());
+              },
               orElse: () {},
             );
           },
@@ -83,25 +88,7 @@ class MyBlogOverviewPage extends HookWidget implements AutoRouteWrapper {
             ),
           ],
         ),
-        body: ListView(
-          padding: EdgeInsets.symmetric(vertical: 20.0),
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 120.0),
-              child: Text(
-                'My posts',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            MyBlogOverviewBody(),
-          ],
-        ),
+        body: MyBlogOverviewBody(),
         // floatingActionButton: FloatingActionButton(
         //   onPressed: () {
         //     ExtendedNavigator.of(context).push(Routes.blogFormPage,
