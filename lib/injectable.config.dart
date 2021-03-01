@@ -12,6 +12,7 @@ import 'package:injectable/injectable.dart';
 import 'bloc/auth/auth_bloc.dart';
 import 'repository/auth_repository.dart';
 import 'repository/auth_repository_abstract.dart';
+import 'bloc/auth/bloc/blog_actor/blog_actor_bloc.dart';
 import 'bloc/blog/blog_form/blog_form_bloc.dart';
 import 'repository/blog_repository.dart';
 import 'repository/blog_repository_abstract.dart';
@@ -41,6 +42,7 @@ GetIt $initGetIt(
         get<FlutterSecureStorage>(),
         get<BlogRepositoryAbstract>(),
       ));
+  gh.factory<BlogActorBloc>(() => BlogActorBloc(get<BlogRepositoryAbstract>()));
   gh.factory<BlogFormBloc>(() => BlogFormBloc(get<BlogRepositoryAbstract>()));
   gh.factory<CurrentAuthBloc>(
       () => CurrentAuthBloc(get<AuthRepositoryAbstract>()));

@@ -105,7 +105,7 @@ class BlogRepository implements BlogRepositoryAbstract {
   Future<Either<BlogFailures, Unit>> deleteBlog(String blogId) async {
     if (user != null)
       try {
-        await dio.post(
+        await dio.delete(
           'https://flutternode.herokuapp.com/api/posts/delete_post',
           data: {
             'blogId': blogId,
