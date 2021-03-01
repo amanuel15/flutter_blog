@@ -57,15 +57,16 @@ class BlogRepository implements BlogRepositoryAbstract {
     if (user != null)
       try {
         print('\nblogId: ' + blog.blogId);
-        await dio.post(
+        await dio.put(
           'https://flutternode.herokuapp.com/api/posts/update_post',
-          queryParameters: {
-            'blogId': blog.blogId,
-          },
+          // queryParameters: {
+          //   'blogId': blog.blogId,
+          // },
           data: {
             'title': blog.title,
             'body': blog.body,
             'userEmail': user.userEmail,
+            'blogId': blog.blogId,
           },
         );
         return right(unit);
