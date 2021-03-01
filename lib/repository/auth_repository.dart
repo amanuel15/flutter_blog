@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:idea_sharing/failures/auth_failures.dart';
+import 'package:idea_sharing/models/dummy_user.dart';
+import 'package:idea_sharing/failures/blog_failure.dart';
 import 'package:idea_sharing/models/user.dart';
 import 'package:idea_sharing/models/value_objects.dart';
 import 'package:idea_sharing/repository/auth_repository_abstract.dart';
@@ -112,13 +114,28 @@ class AuthRepository implements AuthRepositoryAbstract {
     String token = await flutterSecureStorage.read(key: 'token');
     String id = await flutterSecureStorage.read(key: 'id');
     String email = await flutterSecureStorage.read(key: 'email');
-    print('\ntoken: ' + token + '\nid: ' + id + '\nemail' + email);
     if (token == null || id == null) {
       _blogRepository.setUser(null);
       return optionOf(null);
     }
+    print('\ntoken: ' + token + '\nid: ' + id + '\nemail' + email);
     final user = User(userId: id, token: token, userEmail: email);
     _blogRepository.setUser(user);
     return optionOf(user);
+  }
+
+  @override
+  Future<Either<BlogFailures, Unit>> changePassword(DummyUser user) async {
+    try {
+      final response = await dio.put(
+        'https://flutternode.herokuapp.com/api/user/change_password',
+        data: {
+          'password': user.password,
+        },
+      );
+      return right(unit);
+    } on DioError catch (e) {
+      return left(BlogFailures.unexpected());
+    }
   }
 }

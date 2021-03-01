@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:idea_sharing/failures/auth_failures.dart';
+import 'package:idea_sharing/failures/blog_failure.dart';
+import 'package:idea_sharing/models/dummy_user.dart';
 import 'package:idea_sharing/models/user.dart';
 import 'package:idea_sharing/models/value_objects.dart';
 
@@ -14,5 +16,6 @@ abstract class AuthRepositoryAbstract {
     @required Password password,
     //@required Name name,
   });
+  Future<Either<BlogFailures, Unit>> changePassword(DummyUser user);
   Future logout();
 }

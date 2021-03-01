@@ -19,6 +19,7 @@ import 'repository/blog_repository_abstract.dart';
 import 'bloc/blog/blog_watcher/blog_watcher_bloc.dart';
 import 'bloc/auth/bloc/current_auth_bloc.dart';
 import 'injectable_modules.dart';
+import 'bloc/auth/bloc/profile_form/profile_form_bloc.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -46,6 +47,8 @@ GetIt $initGetIt(
   gh.factory<BlogFormBloc>(() => BlogFormBloc(get<BlogRepositoryAbstract>()));
   gh.factory<CurrentAuthBloc>(
       () => CurrentAuthBloc(get<AuthRepositoryAbstract>()));
+  gh.factory<ProfileFormBloc>(
+      () => ProfileFormBloc(get<AuthRepositoryAbstract>()));
   gh.factory<AuthBloc>(() => AuthBloc(get<AuthRepositoryAbstract>()));
   return get;
 }

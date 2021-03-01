@@ -10,9 +10,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../models/blog.dart';
+import '../models/dummy_user.dart';
 import '../presentation/blog_form/blog_form_page.dart';
 import '../presentation/blog_overview/blog_overview_page.dart';
 import '../presentation/blog_overview/my_blog_overview_page.dart';
+import '../presentation/profile/blog_profile_page.dart';
 import '../presentation/sign_in/log_in_page.dart';
 import '../presentation/sign_in/sign_up_page.dart';
 import '../presentation/splash_page.dart';
@@ -24,6 +26,7 @@ class Routes {
   static const String blogOverviewPage = '/blog-overview-page';
   static const String myBlogOverviewPage = '/my-blog-overview-page';
   static const String blogFormPage = '/blog-form-page';
+  static const String blogProfilePage = '/blog-profile-page';
   static const all = <String>{
     splashPage,
     logInPage,
@@ -31,6 +34,7 @@ class Routes {
     blogOverviewPage,
     myBlogOverviewPage,
     blogFormPage,
+    blogProfilePage,
   };
 }
 
@@ -44,6 +48,7 @@ class Router extends RouterBase {
     RouteDef(Routes.blogOverviewPage, page: BlogOverviewPage),
     RouteDef(Routes.myBlogOverviewPage, page: MyBlogOverviewPage),
     RouteDef(Routes.blogFormPage, page: BlogFormPage),
+    RouteDef(Routes.blogProfilePage, page: BlogProfilePage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -88,6 +93,16 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    BlogProfilePage: (data) {
+      final args = data.getArgs<BlogProfilePageArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => BlogProfilePage(
+          key: args.key,
+          user: args.user,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -116,6 +131,15 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         Routes.blogFormPage,
         arguments: BlogFormPageArguments(key: key, editedBlog: editedBlog),
       );
+
+  Future<dynamic> pushBlogProfilePage({
+    Key key,
+    @required DummyUser user,
+  }) =>
+      push<dynamic>(
+        Routes.blogProfilePage,
+        arguments: BlogProfilePageArguments(key: key, user: user),
+      );
 }
 
 /// ************************************************************************
@@ -127,4 +151,11 @@ class BlogFormPageArguments {
   final Key key;
   final Blog editedBlog;
   BlogFormPageArguments({this.key, @required this.editedBlog});
+}
+
+/// BlogProfilePage arguments holder class
+class BlogProfilePageArguments {
+  final Key key;
+  final DummyUser user;
+  BlogProfilePageArguments({this.key, @required this.user});
 }

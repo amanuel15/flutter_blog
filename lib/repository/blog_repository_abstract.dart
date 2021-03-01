@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:idea_sharing/failures/blog_failure.dart';
 import 'package:idea_sharing/models/blog.dart';
+import 'package:idea_sharing/models/dummy_user.dart';
 import 'package:idea_sharing/models/user.dart';
 
 abstract class BlogRepositoryAbstract {

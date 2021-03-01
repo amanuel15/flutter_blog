@@ -96,7 +96,7 @@ class SignUpForm extends StatelessWidget {
                     context.read<AuthBloc>().add(AuthEvent.register()),
                 color: Colors.lightBlue,
                 child: const Text(
-                  'SIGN IN',
+                  'SIGN Up',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
