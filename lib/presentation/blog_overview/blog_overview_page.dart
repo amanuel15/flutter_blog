@@ -1,7 +1,9 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:idea_sharing/bloc/auth/auth_actor/auth_actor_bloc.dart';
 import 'package:idea_sharing/bloc/auth/current_auth/current_auth_bloc.dart';
 import 'package:idea_sharing/bloc/blog/blog_watcher/blog_watcher_bloc.dart';
 import 'package:idea_sharing/injectable.dart';
@@ -19,6 +21,8 @@ class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
           return getIt<BlogWatcherBloc>()
             ..add(const BlogWatcherEvent.watchStarted());
         }),
+        BlocProvider<AuthActorBloc>(
+            create: (context) => getIt<AuthActorBloc>()),
       ],
       child: this,
     );
@@ -31,12 +35,35 @@ class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
         BlocListener<CurrentAuthBloc, CurrentAuthState>(
           listener: (context, state) {
             state.maybeMap(
-              unauthenticated: (_) =>
-                  ExtendedNavigator.of(context).popAndPush(Routes.logInPage),
+              unauthenticated: (_) {
+                ExtendedNavigator.of(context).popUntilRoot();
+                ExtendedNavigator.of(context).popAndPush(Routes.logInPage);
+              },
               orElse: () {},
             );
           },
         ),
+        BlocListener<AuthActorBloc, AuthActorState>(listener: (context, state) {
+          state.maybeMap(
+            deleteFailure: (state) {
+              FlushbarHelper.createError(
+                duration: const Duration(seconds: 5),
+                message: state.blogFailures.map(
+                    // Use localized strings here in your apps
+                    insufficientPermissions: (_) =>
+                        'Insufficient permissions ❌',
+                    unableToUpdate: (_) => 'Impossible error',
+                    unexpected: (_) =>
+                        'Unexpected error occured while deleting, please contact support.'),
+              ).show(context);
+            },
+            deleteSuccess: (state) {
+              context.read<CurrentAuthBloc>().add(CurrentAuthEvent.signedOut());
+              //ExtendedNavigator.of(context).popUntilRoot();
+            },
+            orElse: () {},
+          );
+        }),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -74,7 +101,7 @@ class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
                       ),
                       CustomListTile(
                         icon: Icons.person,
-                        text: 'Profile',
+                        text: 'Change Password',
                         onTap: () => ExtendedNavigator.of(context).push(
                             Routes.blogProfilePage,
                             arguments: BlogProfilePageArguments(
@@ -83,6 +110,13 @@ class BlogOverviewPage extends HookWidget implements AutoRouteWrapper {
                                     userEmail: state.user.userEmail,
                                     password: '',
                                     token: state.user.token))),
+                      ),
+                      CustomListTile(
+                        icon: Icons.person,
+                        text: 'Delete Account',
+                        onTap: () => context
+                            .read<AuthActorBloc>()
+                            .add(AuthActorEvent.deleted()),
                       ),
                       CustomListTile(
                         icon: Icons.logout,

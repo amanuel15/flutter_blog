@@ -9,6 +9,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+import 'bloc/auth/auth_actor/auth_actor_bloc.dart';
 import 'bloc/auth/auth_form/auth_bloc.dart';
 import 'repository/auth_repository.dart';
 import 'repository/auth_repository_abstract.dart';
@@ -39,6 +40,7 @@ GetIt $initGetIt(
       () => BlogRepository(get<Dio>(), get<FlutterSecureStorage>()));
   gh.factory<BlogWatcherBloc>(
       () => BlogWatcherBloc(get<BlogRepositoryAbstract>()));
+  gh.factory<AuthActorBloc>(() => AuthActorBloc(get<BlogRepositoryAbstract>()));
   gh.lazySingleton<AuthRepositoryAbstract>(() => AuthRepository(
         get<Dio>(),
         get<FlutterSecureStorage>(),

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:idea_sharing/failures/auth_failures.dart';
 
 import 'package:idea_sharing/failures/blog_failure.dart';
 import 'package:idea_sharing/models/blog.dart';
@@ -11,7 +12,8 @@ abstract class BlogRepositoryAbstract {
   Future<Either<BlogFailures, Unit>> updateBlog(Blog blog);
   Future<Either<BlogFailures, Unit>> deleteBlog(String blogId);
   Future<Either<BlogFailures, Unit>> likeUnlikeBlog(Blog blog);
-  Future<Either<BlogFailures, Unit>> createComment(Comment comment);
+  Future<Either<BlogFailures, Comment>> createComment(Comment comment);
+  Future<Either<BlogFailures, Unit>> deleteAccount();
   void setUser(User user);
   //Future<Either<BlogFailures, List<Blog>>> getMyFeed([String lastId]);
 }

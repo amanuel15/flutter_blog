@@ -44,8 +44,10 @@ class BlogDetailsPage extends StatelessWidget {
                             'Unexpected error occured, please contact support.'),
                   ).show(context);
                 },
-                (_) {
-                  //
+                (comment) {
+                  blog.copyWith(
+                    comments: blog.comments + [comment],
+                  );
                 },
               );
             },

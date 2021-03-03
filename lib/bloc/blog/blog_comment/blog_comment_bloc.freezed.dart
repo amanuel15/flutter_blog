@@ -450,7 +450,7 @@ class _$BlogCommentStateTearOff {
       @required
           bool showErrorMessages,
       @required
-          Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption}) {
+          Option<Either<BlogFailures, Comment>> saveFailureOrSuccessOption}) {
     return _BlogCommentState(
       comment: comment,
       isSaving: isSaving,
@@ -469,7 +469,7 @@ mixin _$BlogCommentState {
   Comment get comment;
   bool get isSaving;
   bool get showErrorMessages;
-  Option<Either<BlogFailures, Unit>> get saveFailureOrSuccessOption;
+  Option<Either<BlogFailures, Comment>> get saveFailureOrSuccessOption;
 
   @JsonKey(ignore: true)
   $BlogCommentStateCopyWith<BlogCommentState> get copyWith;
@@ -484,7 +484,7 @@ abstract class $BlogCommentStateCopyWith<$Res> {
       {Comment comment,
       bool isSaving,
       bool showErrorMessages,
-      Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption});
+      Option<Either<BlogFailures, Comment>> saveFailureOrSuccessOption});
 
   $CommentCopyWith<$Res> get comment;
 }
@@ -513,7 +513,7 @@ class _$BlogCommentStateCopyWithImpl<$Res>
           : showErrorMessages as bool,
       saveFailureOrSuccessOption: saveFailureOrSuccessOption == freezed
           ? _value.saveFailureOrSuccessOption
-          : saveFailureOrSuccessOption as Option<Either<BlogFailures, Unit>>,
+          : saveFailureOrSuccessOption as Option<Either<BlogFailures, Comment>>,
     ));
   }
 
@@ -539,7 +539,7 @@ abstract class _$BlogCommentStateCopyWith<$Res>
       {Comment comment,
       bool isSaving,
       bool showErrorMessages,
-      Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption});
+      Option<Either<BlogFailures, Comment>> saveFailureOrSuccessOption});
 
   @override
   $CommentCopyWith<$Res> get comment;
@@ -571,7 +571,7 @@ class __$BlogCommentStateCopyWithImpl<$Res>
           : showErrorMessages as bool,
       saveFailureOrSuccessOption: saveFailureOrSuccessOption == freezed
           ? _value.saveFailureOrSuccessOption
-          : saveFailureOrSuccessOption as Option<Either<BlogFailures, Unit>>,
+          : saveFailureOrSuccessOption as Option<Either<BlogFailures, Comment>>,
     ));
   }
 }
@@ -595,7 +595,7 @@ class _$_BlogCommentState implements _BlogCommentState {
   @override
   final bool showErrorMessages;
   @override
-  final Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption;
+  final Option<Either<BlogFailures, Comment>> saveFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -638,15 +638,15 @@ class _$_BlogCommentState implements _BlogCommentState {
 
 abstract class _BlogCommentState implements BlogCommentState {
   const factory _BlogCommentState(
-          {@required
-              Comment comment,
-          @required
-              bool isSaving,
-          @required
-              bool showErrorMessages,
-          @required
-              Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption}) =
-      _$_BlogCommentState;
+      {@required
+          Comment comment,
+      @required
+          bool isSaving,
+      @required
+          bool showErrorMessages,
+      @required
+          Option<Either<BlogFailures, Comment>>
+              saveFailureOrSuccessOption}) = _$_BlogCommentState;
 
   @override
   Comment get comment;
@@ -655,7 +655,7 @@ abstract class _BlogCommentState implements BlogCommentState {
   @override
   bool get showErrorMessages;
   @override
-  Option<Either<BlogFailures, Unit>> get saveFailureOrSuccessOption;
+  Option<Either<BlogFailures, Comment>> get saveFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$BlogCommentStateCopyWith<_BlogCommentState> get copyWith;

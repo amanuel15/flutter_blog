@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:idea_sharing/failures/auth_failures.dart';
 import 'package:idea_sharing/failures/blog_failure.dart';
 import 'package:idea_sharing/models/blog.dart';
 import 'package:idea_sharing/models/user.dart';
@@ -80,7 +81,7 @@ class BlogRepository implements BlogRepositoryAbstract {
   }
 
   @override
-  Future<Either<BlogFailures, Unit>> createComment(Comment comment) async {
+  Future<Either<BlogFailures, Comment>> createComment(Comment comment) async {
     if (user != null)
       try {
         await dio.post(
@@ -92,7 +93,7 @@ class BlogRepository implements BlogRepositoryAbstract {
             'blogId': comment.blogId,
           },
         );
-        return right(unit);
+        return right(comment.copyWith(userEmail: user.userEmail));
       } on DioError catch (e) {
         if (e.response.statusCode == 400)
           return left(BlogFailures.unableToUpdate());
@@ -257,6 +258,20 @@ class BlogRepository implements BlogRepositoryAbstract {
           'https://flutternode.herokuapp.com/api/posts/like_unlike_post',
           data: {'postId': blog.blogId},
         );
+        return right(unit);
+      } on DioError catch (e) {
+        return left(BlogFailures.unexpected());
+      }
+    else
+      return left(BlogFailures.insufficientPermissions());
+  }
+
+  @override
+  Future<Either<BlogFailures, Unit>> deleteAccount() async {
+    if (user != null)
+      try {
+        await dio
+            .delete('https://flutternode.herokuapp.com/api/user/delete_user');
         return right(unit);
       } on DioError catch (e) {
         return left(BlogFailures.unexpected());

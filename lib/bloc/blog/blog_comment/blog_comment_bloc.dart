@@ -35,7 +35,7 @@ class BlogCommentBloc extends Bloc<BlogCommentEvent, BlogCommentState> {
         );
       },
       saved: (e) async* {
-        Either<BlogFailures, Unit> failureOrSuccess;
+        Either<BlogFailures, Comment> failureOrSuccess;
         yield state.copyWith(
           isSaving: true,
           saveFailureOrSuccessOption: none(),

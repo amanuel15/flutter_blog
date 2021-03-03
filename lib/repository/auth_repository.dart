@@ -86,7 +86,7 @@ class AuthRepository implements AuthRepositoryAbstract {
         data: {
           'email': email.getOrCrash(),
           'password': password.getOrCrash(),
-          'name': 'random person',
+          //'name': 'random person',
         },
       );
 

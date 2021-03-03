@@ -6,7 +6,7 @@ abstract class BlogCommentState with _$BlogCommentState {
     @required Comment comment,
     @required bool isSaving,
     @required bool showErrorMessages,
-    @required Option<Either<BlogFailures, Unit>> saveFailureOrSuccessOption,
+    @required Option<Either<BlogFailures, Comment>> saveFailureOrSuccessOption,
   }) = _BlogCommentState;
 
   factory BlogCommentState.initial() => BlogCommentState(
