@@ -1,16 +1,11 @@
-import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:idea_sharing/failures/auth_failures.dart';
 import 'package:idea_sharing/models/dummy_user.dart';
 import 'package:idea_sharing/failures/blog_failure.dart';
 import 'package:idea_sharing/models/user.dart';
 import 'package:idea_sharing/models/value_objects.dart';
 import 'package:idea_sharing/repository/auth_repository_abstract.dart';
-import 'package:idea_sharing/repository/blog_repository.dart';
 import 'package:idea_sharing/repository/blog_repository_abstract.dart';
-import 'package:path/path.dart' as path;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
@@ -86,7 +81,7 @@ class AuthRepository implements AuthRepositoryAbstract {
     //@required Name name,
   }) async {
     try {
-      final response = await dio.post(
+      await dio.post(
         'https://flutternode.herokuapp.com/api/user/register',
         data: {
           'email': email.getOrCrash(),
@@ -127,7 +122,7 @@ class AuthRepository implements AuthRepositoryAbstract {
   @override
   Future<Either<BlogFailures, Unit>> changePassword(DummyUser user) async {
     try {
-      final response = await dio.put(
+      await dio.put(
         'https://flutternode.herokuapp.com/api/user/change_password',
         data: {
           'password': user.password,

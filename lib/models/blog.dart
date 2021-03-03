@@ -29,10 +29,17 @@ abstract class Blog implements _$Blog {
 abstract class Comment implements _$Comment {
   const Comment._();
   const factory Comment({
-    @required String userId,
-    @required String userEmail,
     @required String comment,
+    String userEmail,
+    String blogId,
+    String userId,
   }) = _Comment;
+
+  factory Comment.empty() => Comment(
+        userEmail: '',
+        userId: '',
+        comment: '',
+      );
 
   factory Comment.fromJson(Map<String, dynamic> json) =>
       _$CommentFromJson(json);

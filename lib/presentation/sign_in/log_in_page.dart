@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:idea_sharing/bloc/auth/auth_bloc.dart';
+import 'package:idea_sharing/bloc/auth/auth_form/auth_bloc.dart';
 import 'package:idea_sharing/injectable.dart';
 import 'package:idea_sharing/presentation/sign_in/widgets/log_in_form.dart';
 import 'package:idea_sharing/routes/router.gr.dart';

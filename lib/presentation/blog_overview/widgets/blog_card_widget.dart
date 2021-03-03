@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:idea_sharing/bloc/auth/bloc/current_auth_bloc.dart';
+import 'package:idea_sharing/bloc/auth/current_auth/current_auth_bloc.dart';
 import 'package:idea_sharing/models/blog.dart';
 import 'package:idea_sharing/routes/router.gr.dart';
 
@@ -30,12 +30,8 @@ class BlogCard extends StatelessWidget {
         //color: Colors.amber[100],
         child: InkWell(
           onTap: () {
-            if (blog.userId == userId) {
-              ExtendedNavigator.of(context).push(Routes.blogFormPage,
-                  arguments: BlogFormPageArguments(editedBlog: blog));
-            }
-            // TODO: make a blog details page
-            //ExtendedNavigator.of(context).push(routeName);
+            ExtendedNavigator.of(context).push(Routes.blogDetailsPage,
+                arguments: BlogDetailsPageArguments(blog: blog));
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

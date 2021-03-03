@@ -3,7 +3,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:idea_sharing/failures/blog_failure.dart';
 import 'package:idea_sharing/models/blog.dart';
 import 'package:idea_sharing/models/user.dart';
-import 'package:idea_sharing/repository/auth_repository_abstract.dart';
 import 'package:idea_sharing/repository/blog_repository_abstract.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
@@ -81,15 +80,16 @@ class BlogRepository implements BlogRepositoryAbstract {
   }
 
   @override
-  Future<Either<BlogFailures, Unit>> createComment(
-      Comment comment, Blog blog) async {
+  Future<Either<BlogFailures, Unit>> createComment(Comment comment) async {
     if (user != null)
       try {
         await dio.post(
-          'https://flutternode.herokuapp.com/api/posts/create_update_comment',
+          'https://flutternode.herokuapp.com/api/posts/create_comment',
           data: {
             'userEmail': user.userEmail,
+            'userId': user.userId,
             'comment': comment.comment,
+            'blogId': comment.blogId,
           },
         );
         return right(unit);
@@ -147,12 +147,25 @@ class BlogRepository implements BlogRepositoryAbstract {
         //print('\n***data***:' + response.data['posts'][0]);
         List<Blog> blogs = new List(posts.length);
         for (int i = 0; i < posts.length; i++) {
+          List a = posts[i]['comments'];
+          List<Comment> comments = new List(a.length);
+          if (a.isNotEmpty)
+            for (int j = 0; j < a.length; j++) {
+              print(a[j]);
+              comments[j] = Comment(
+                comment: a[j]['comment'],
+                userEmail: a[j]['userEmail'],
+                userId: a[j]['_id'],
+                blogId: posts[j]['_id'],
+              );
+            }
           blogs[i] = Blog(
             userEmail: posts[i]['userEmail'],
             userId: posts[i]['userId'],
             title: posts[i]['title'],
             body: posts[i]['body'],
             blogId: posts[i]['_id'],
+            comments: comments,
           );
         }
         if (blogs.isEmpty)

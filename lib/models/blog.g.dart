@@ -33,15 +33,17 @@ Map<String, dynamic> _$_$_BlogToJson(_$_Blog instance) => <String, dynamic>{
 
 _$_Comment _$_$_CommentFromJson(Map<String, dynamic> json) {
   return _$_Comment(
-    userId: json['userId'] as String,
-    userEmail: json['userEmail'] as String,
     comment: json['comment'] as String,
+    userEmail: json['userEmail'] as String,
+    blogId: json['blogId'] as String,
+    userId: json['userId'] as String,
   );
 }
 
 Map<String, dynamic> _$_$_CommentToJson(_$_Comment instance) =>
     <String, dynamic>{
-      'userId': instance.userId,
-      'userEmail': instance.userEmail,
       'comment': instance.comment,
+      'userEmail': instance.userEmail,
+      'blogId': instance.blogId,
+      'userId': instance.userId,
     };

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_sharing/bloc/blog/blog_watcher/blog_watcher_bloc.dart';
-import 'package:idea_sharing/presentation/blog_overview/widgets/blog_card_widget.dart';
 import 'package:idea_sharing/presentation/blog_overview/widgets/my_blog_card_widgets.dart';
 
 class MyBlogOverviewBody extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:idea_sharing/presentation/blog_form/blog_form_page.dart';
+import 'package:idea_sharing/presentation/blog_overview/blog_details_page.dart';
 import 'package:idea_sharing/presentation/blog_overview/blog_overview_page.dart';
 import 'package:idea_sharing/presentation/blog_overview/my_blog_overview_page.dart';
 import 'package:idea_sharing/presentation/profile/blog_profile_page.dart';
@@ -17,5 +18,6 @@ import 'package:idea_sharing/presentation/splash_page.dart';
       MaterialRoute(page: MyBlogOverviewPage),
       MaterialRoute(page: BlogFormPage),
       MaterialRoute(page: BlogProfilePage),
+      MaterialRoute(page: BlogDetailsPage),
     ])
 class $Router {}

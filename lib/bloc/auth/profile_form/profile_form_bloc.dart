@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:idea_sharing/failures/blog_failure.dart';
 import 'package:idea_sharing/models/dummy_user.dart';
-import 'package:idea_sharing/models/user.dart';
 import 'package:idea_sharing/repository/auth_repository_abstract.dart';
 import 'package:injectable/injectable.dart';
 
